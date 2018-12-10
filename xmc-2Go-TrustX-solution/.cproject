@@ -37,8 +37,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/cmd_process}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/serial_io}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/xmc2go-TrustX/src/trustx-lib/optiga/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/xmc2go-TrustX/src/trustx-lib/externals/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/xmc2go-TrustX/Libraries/optiga-trust-x/optiga/include}&quot;"/>
 								</option>
 								<option id="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.preprocessor.def.1618968817" name="Defined symbols (-D)" superClass="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="XMC1100_Q024x0064"/>
@@ -84,6 +84,41 @@
 							<tool id="com.ifx.xmc4000.appRelease.createflash.1844393299" name="ARM-GCC Create Flash Image" superClass="com.ifx.xmc4000.appRelease.createflash"/>
 							<tool id="com.ifx.xmc4000.appRelease.createlisting.1983518407" name="ARM-GCC Create Listing" superClass="com.ifx.xmc4000.appRelease.createlisting"/>
 							<tool id="com.ifx.xmc4000.printsize.1473690561" name="ARM-GCC Print Size" superClass="com.ifx.xmc4000.printsize"/>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="com.ifx.xmc4000.appRelease.1192286754.2065123260" name="/" resourcePath="Libraries/optiga-trust-x/optiga/include">
+						<toolChain id="com.ifx.xmc4000.appRelease.toolChain.1890936058" name="ARM-GCC Application" superClass="com.ifx.xmc4000.appRelease.toolChain" unusedChildren="">
+							<option id="com.ifx.xmc4000.option.debugging.level.140495340.876337282" name="Debug level" superClass="com.ifx.xmc4000.option.debugging.level.140495340"/>
+							<option id="com.ifx.xmc4000.option.targetPath.810480158.1405529248" name="Target Path" superClass="com.ifx.xmc4000.option.targetPath.810480158"/>
+							<option id="com.ifx.xmc4000.option.target.processor.292785845.1092129964" name="Processor" superClass="com.ifx.xmc4000.option.target.processor.292785845"/>
+							<option id="com.ifx.xmc4000.option.target.fpu.1812487776.49640275" name="Fpu (-mfpu)" superClass="com.ifx.xmc4000.option.target.fpu.1812487776"/>
+							<option id="com.ifx.xmc4000.option.targetName.920082864.510696483" name="Target Name" superClass="com.ifx.xmc4000.option.targetName.920082864"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.GNU_ELF" id="com.ifx.xmc4000.targetPlatform" isAbstract="false" name="Windows Platform" osList="win32" superClass="com.ifx.xmc4000.targetPlatform"/>
+							<tool id="com.ifx.xmc4000.appRelease.compiler.1469041697" name="ARM-GCC C Compiler" superClass="com.ifx.xmc4000.appRelease.compiler.2038964842">
+								<option id="com.ifx.xmc4000.compiler.option.include.paths.2013786291" name="Include paths (-I)" superClass="com.ifx.xmc4000.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/XMCLib/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/Libraries/CMSIS/Include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/Libraries/CMSIS/Infineon/XMC1100_series/Include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Dave/Generated}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/cmd_process}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/serial_io}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/xmc2go-TrustX/src/trustx-lib/externals/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/xmc2go-TrustX/Libraries/optiga-trust-x/optiga/include}&quot;"/>
+								</option>
+								<inputType id="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.231045933" superClass="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input"/>
+							</tool>
+							<tool id="com.ifx.xmc4000.appRelease.cppcompiler.878982861" name="ARM-GCC C++ Compiler" superClass="com.ifx.xmc4000.appRelease.cppcompiler.1718435155"/>
+							<tool id="com.ifx.xmc4000.appRelease.assembler.2016816895" name="ARM-GCC Assembler" superClass="com.ifx.xmc4000.appRelease.assembler.680828825">
+								<inputType id="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.1223071562" superClass="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input"/>
+							</tool>
+							<tool id="com.ifx.xmc4000.appRelease.linker.133869098" name="ARM-GCC C Linker" superClass="com.ifx.xmc4000.appRelease.linker.978599593"/>
+							<tool id="com.ifx.xmc4000.appRelease.cpplinker.1553455820" name="ARM-GCC C++ Linker" superClass="com.ifx.xmc4000.appRelease.cpplinker.1984180663"/>
+							<tool id="com.ifx.xmc4000.libLinker.1464708748" name="ARM-GCC Archiver" superClass="com.ifx.xmc4000.libLinker.126511817"/>
+							<tool id="com.ifx.xmc4000.appRelease.createflash.289203688" name="ARM-GCC Create Flash Image" superClass="com.ifx.xmc4000.appRelease.createflash.1844393299"/>
+							<tool id="com.ifx.xmc4000.appRelease.createlisting.1003498564" name="ARM-GCC Create Listing" superClass="com.ifx.xmc4000.appRelease.createlisting.1983518407"/>
+							<tool id="com.ifx.xmc4000.printsize.1265334261" name="ARM-GCC Print Size" superClass="com.ifx.xmc4000.printsize.1473690561"/>
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
@@ -199,21 +234,6 @@
 		<project id="xmc2go-trustX.com.ifx.xmc4000.appProject.1352345730" name="ARM-GCC Application" projectType="com.ifx.xmc4000.appProject"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appDebug.1215817496;com.ifx.xmc4000.appDebug.1215817496.;com.ifx.xmc4000.appDebug.assembler.367996464;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.1993476997">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appRelease.1192286754;com.ifx.xmc4000.appRelease.1192286754.;com.ifx.xmc4000.appRelease.compiler.2038964842;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.444342745">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appRelease.1192286754;com.ifx.xmc4000.appRelease.1192286754.;com.ifx.xmc4000.appRelease.assembler.680828825;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.1992315686">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appDebug.1215817496;com.ifx.xmc4000.appDebug.1215817496.;com.ifx.xmc4000.appDebug.compiler.585023065;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.1780921610">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
-		</scannerConfigBuildInfo>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.language.mapping">
 		<project-mappings/>
 	</storageModule>
@@ -226,4 +246,20 @@
 		</configuration>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appRelease.1192286754;com.ifx.xmc4000.appRelease.1192286754.;com.ifx.xmc4000.appRelease.compiler.2038964842;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.444342745">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appDebug.1215817496;com.ifx.xmc4000.appDebug.1215817496.;com.ifx.xmc4000.appDebug.assembler.367996464;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.1993476997">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appRelease.1192286754;com.ifx.xmc4000.appRelease.1192286754.;com.ifx.xmc4000.appRelease.assembler.680828825;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.1992315686">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appDebug.1215817496;com.ifx.xmc4000.appDebug.1215817496.;com.ifx.xmc4000.appDebug.compiler.585023065;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.1780921610">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+	</storageModule>
 </cproject>
