@@ -1,0 +1,29 @@
+/******
+Issue 1
+*******/
+
+Issue in:
+optiga_lib_status_t optiga_crypt_hash_start(optiga_hash_context_t* hash_ctx)
+{
+return_value = CmdLib_CalcHash(&hash_options);
+if(CMD_LIB_OK!=return_value)
+{
+	return_value = OPTIGA_LIB_SUCCESS;
+}
+
+}
+
+if(CMD_LIB_OK!=return_value) is performing erronous comparison. 
+Correct is, to keep concistency 
+
+ if (CMD_LIB_OK!=return_value)
+ {
+	return OPTIGA_LIB_ERROR;
+ }
+
+ return OPTIGA_LIB_SUCCESS;
+
+/******
+Issue 2
+*******/
+Increase Stack Size to 2048 uder linker_script.ld
