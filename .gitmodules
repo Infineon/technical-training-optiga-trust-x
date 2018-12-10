@@ -1,0 +1,3 @@
+[submodule "xmc-2Go-TrustX-solution/Libraries/optiga-trust-x"]
+	path = xmc-2Go-TrustX-solution/Libraries/optiga-trust-x
+	url = https://github.com/Infineon/optiga-trust-x
