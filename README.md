@@ -16,10 +16,13 @@ As embedded systems (e.g. IoT devices) are increasingly gaining the attention of
 	
 	![alt text](https://github.com/Infineon/technical-training-optiga-trust-x/blob/master/Images/XMC2Go.PNG)
 	* [S2GO SECURITY OPTIGA X](https://www.infineon.com/cms/de/product/security-smart-card-solutions/optiga-embedded-security-solutions/optiga-trust/optiga-trust-x-sls-32aia/)
+	
 	![alt text](https://github.com/Infineon/technical-training-optiga-trust-x/blob/master/Images/S2Go-TrustX.PNG)
 	* 2x 8-PIN Male Headers 
+	
 	![alt text](https://github.com/Infineon/technical-training-optiga-trust-x/blob/master/Images/8-Pin-Male-Headers.PNG)
 	* 2x 8-PIN Female Headers
+	
 	![alt text](https://github.com/Infineon/technical-training-optiga-trust-x/blob/master/Images/8-Pin-Female-Headers.PNG)
 	* Micro USB Cable
 
