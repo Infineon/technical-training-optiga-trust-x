@@ -24,8 +24,6 @@
 *
 * \file main.c
 *
-* \brief   This file provides the example for ECDSA Sign operation using #optiga_crypt_ecdsa_sign.
-* 
 *
 * \ingroup
 * @{
