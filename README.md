@@ -1,5 +1,5 @@
 # OPTIGA™ Trust X Host Library Integration Guide
-
+ 
 This application note will serve as a guide on how to integrate and use Infineon's OPTIGA™ Trust X [hostcode library](https://github.com/Infineon/optiga-trust-x) to an application project.
 
 ## Introduction
@@ -11,6 +11,7 @@ As embedded systems (e.g. IoT devices) are increasingly gaining the attention of
 * System Requirements
 	* Windows 7/8/10
 	* 4GB of RAM or above
+	
 * Hardware Requirements
 	* [XMC2Go™](https://www.infineon.com/cms/de/product/evaluation-boards/kit_xmc_2go_xmc1100_v1/)
 	
@@ -25,12 +26,18 @@ As embedded systems (e.g. IoT devices) are increasingly gaining the attention of
 	
 	![alt text](https://github.com/Infineon/technical-training-optiga-trust-x/blob/master/Images/8-Pin-Female-Headers.PNG)
 	* Micro USB Cable
+	
+* Software Requirements
+	* [OPTIGA™ TrustX Host Library](https://github.com/Infineon/optiga-trust-x)
+	* [Dave™4.4.2](https://infineoncommunity.com/dave-download_ID645)
+	* [PuTTY SSH and Telnet Clien](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
+	
 
 ## Getting Started
 
 To get started you can follow the step by step instructions provided in [Optiga_TrustX_Integration_Manual_vX.X.pdf](https://github.com/Infineon/technical-training-optiga-trust-x/tree/master/Docs)
 
-To clone project in to your local hard drive use "--recursive" option. This will clone the OPTIGA Trust X Host library that is added as a submodule into your project as well.
+To clone project in to your local hard drive use "--recursive" option. This will clone the OPTIGA™ TrustX Host Library that is added as a submodule into your project as well.
 
 Example:
 git clone --recursive https://github.com/Infineon/technical-training-optiga-trust-x.git
