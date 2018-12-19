@@ -35,7 +35,7 @@ As embedded systems (e.g. IoT devices) are increasingly gaining the attention of
 
 ## Getting Started
 
-To get started you can follow the step by step instructions provided in [Optiga_TrustX_Integration_Manual_vX.X.pdf](https://github.com/Infineon/technical-training-optiga-trust-x/tree/master/Docs)
+To get started you can follow the step-by-step instructions provided in [Optiga_TrustX_Integration_Manual_vX.X.pdf](https://github.com/Infineon/technical-training-optiga-trust-x/tree/master/Docs)
 
 To clone project in to your local hard drive use "--recursive" option. This will clone the OPTIGA™ TrustX Host Library that is added as a submodule into your project as well.
 
