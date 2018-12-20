@@ -14,7 +14,7 @@ As embedded systems (e.g. IoT devices) are increasingly gaining the attention of
 	
 * Hardware Requirements
 	* [XMC2Go™](https://www.infineon.com/cms/de/product/evaluation-boards/kit_xmc_2go_xmc1100_v1/)
-	* [S2GO SECURITY OPTIGA X](https://www.infineon.com/cms/de/product/security-smart-card-solutions/optiga-embedded-security-solutions/optiga-trust/optiga-trust-x-sls-32aia/)
+	* [S2GO SECURITY OPTIGA X](https://www.infineon.com/cms/de/product/evaluation-boards/s2go-security-optiga-x/)
 	* 2x 8-PIN Male Headers 
 	* 2x 8-PIN Female Headers
 	* Micro USB Cable
@@ -32,7 +32,9 @@ To get started you can follow the step-by-step instructions provided in [Optiga_
 To clone project in to your local hard drive use "--recursive" option. This will clone the OPTIGA™ TrustX Host Library ( a git submodule ) as well.
 
 Example:
-git clone --recursive https://github.com/Infineon/technical-training-optiga-trust-x.git
+```console
+$ git clone --recursive https://github.com/Infineon/technical-training-optiga-trust-x.git
+```
 
 ## Contributing
 
