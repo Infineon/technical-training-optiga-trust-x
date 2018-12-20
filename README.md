@@ -1,4 +1,4 @@
-Application Note Framework Integration Guide for OPTIGA™ Trust X
+# Application Note Framework Integration Guide for OPTIGA™ Trust X
  
 This application note will serve as a guide on how to integrate and use Infineon's OPTIGA™ Trust X [Application Note Framework](https://github.com/Infineon/optiga-trust-x) to an application project.
 
