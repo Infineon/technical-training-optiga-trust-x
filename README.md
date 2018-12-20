@@ -28,7 +28,7 @@ As embedded systems (e.g. IoT devices) are increasingly gaining the attention of
 	* Micro USB Cable
 	
 * Software Requirements
-	* [OPTIGA™ TrustX Host Library](https://github.com/Infineon/optiga-trust-x)
+	* [OPTIGA™ TrustX Application Note Framework](https://github.com/Infineon/optiga-trust-x)
 	* [Dave™4.4.2](https://infineoncommunity.com/dave-download_ID645)
 	* [PuTTY SSH and Telnet Clien](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
 	
