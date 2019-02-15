@@ -128,9 +128,14 @@
 							<option id="com.ifx.xmc4000.option.target.processor.292785845.1539023742" name="Processor" superClass="com.ifx.xmc4000.option.target.processor.292785845"/>
 							<option id="com.ifx.xmc4000.option.target.fpu.1812487776.2022233954" name="Fpu (-mfpu)" superClass="com.ifx.xmc4000.option.target.fpu.1812487776"/>
 							<option id="com.ifx.xmc4000.option.targetName.920082864.985952749" name="Target Name" superClass="com.ifx.xmc4000.option.targetName.920082864"/>
-							<tool id="com.ifx.xmc4000.appRelease.compiler.1068248994" name="ARM-GCC C Compiler" superClass="com.ifx.xmc4000.appRelease.compiler.2038964842"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.GNU_ELF" id="com.ifx.xmc4000.targetPlatform" isAbstract="false" name="Windows Platform" osList="win32" superClass="com.ifx.xmc4000.targetPlatform"/>
+							<tool id="com.ifx.xmc4000.appRelease.compiler.1068248994" name="ARM-GCC C Compiler" superClass="com.ifx.xmc4000.appRelease.compiler.2038964842">
+								<inputType id="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.726871686" superClass="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input"/>
+							</tool>
 							<tool id="com.ifx.xmc4000.appRelease.cppcompiler.1613151410" name="ARM-GCC C++ Compiler" superClass="com.ifx.xmc4000.appRelease.cppcompiler.1718435155"/>
-							<tool id="com.ifx.xmc4000.appRelease.assembler.621556311" name="ARM-GCC Assembler" superClass="com.ifx.xmc4000.appRelease.assembler.680828825"/>
+							<tool id="com.ifx.xmc4000.appRelease.assembler.621556311" name="ARM-GCC Assembler" superClass="com.ifx.xmc4000.appRelease.assembler.680828825">
+								<inputType id="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.1725077123" superClass="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input"/>
+							</tool>
 							<tool id="com.ifx.xmc4000.appRelease.linker.1972044774" name="ARM-GCC C Linker" superClass="com.ifx.xmc4000.appRelease.linker.978599593"/>
 							<tool id="com.ifx.xmc4000.appRelease.cpplinker.653108482" name="ARM-GCC C++ Linker" superClass="com.ifx.xmc4000.appRelease.cpplinker.1984180663"/>
 							<tool id="com.ifx.xmc4000.libLinker.2132691302" name="ARM-GCC Archiver" superClass="com.ifx.xmc4000.libLinker.126511817"/>
@@ -237,7 +242,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Libraries/optiga-trust-x/examples|Libraries/optiga-trust-x/examples/authenticate_chip|Libraries/optiga-trust-x/examples/mbedtls_port|Libraries/optiga-trust-x/externals/mbedtls-2.12.0|Libraries/optiga-trust-x/pal/xmc4800_awsfreertos|Libraries/optiga-trust-x/pal/rpi|Libraries/optiga-trust-x/pal/nrf5x|Libraries/optiga-trust-x/pal/esp32_freertos|Libraries/optiga-trust-x/pal/esp32_awsfreertos|cmd_process|serial_io|src|Dave/Model" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Libraries/optiga-trust-x/pal/linux|Libraries/optiga-trust-x/pal/linux/pal_i2c.c|Libraries/optiga-trust-x/examples|Libraries/optiga-trust-x/examples/authenticate_chip|Libraries/optiga-trust-x/examples/mbedtls_port|Libraries/optiga-trust-x/externals/mbedtls-2.12.0|Libraries/optiga-trust-x/pal/xmc4800_awsfreertos|Libraries/optiga-trust-x/pal/rpi|Libraries/optiga-trust-x/pal/nrf5x|Libraries/optiga-trust-x/pal/esp32_freertos|Libraries/optiga-trust-x/pal/esp32_awsfreertos|cmd_process|serial_io|src|Dave/Model" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry excluding="OPTIGATrustLib/include/pal/xmc4500-Relax-Kit-Demo|OPTIGATrustLib/include/pal/xmc4500|OPTIGATrustLib/include/pal/atmel-atsamd21|OPTIGATrustLib/pal/xmc4500-Relax-Kit-Demo|OPTIGATrustLib/pal/xmc4500|OPTIGATrustLib/pal/atmel-atsamd21|trustx-lib/pal/xmc4700_freertos|trustx-lib/pal/xmc4700_dave|trustx-lib/pal/xmc4500_dave|trustx-lib/pal/rpi|trustx-lib/pal/nrf5x|trustx-lib/pal/esp32_freertos|trustx-lib/examples|cmd_process|serial_io" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/cmd_process"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/serial_io"/>

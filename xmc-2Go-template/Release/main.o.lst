@@ -1,0 +1,99 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "main.c"
+  14              	 .section .text.startup.main,"ax",%progbits
+  15              	 .align 1
+  16              	 .global main
+  17              	 .code 16
+  18              	 .thumb_func
+  20              	main:
+  21 0000 13B5     	 push {r0,r1,r4,lr}
+  22 0002 6B46     	 mov r3,sp
+  23 0004 DC1D     	 add r4,r3,#7
+  24 0006 0023     	 mov r3,#0
+  25 0008 2370     	 strb r3,[r4]
+  26 000a FFF7FEFF 	 bl DAVE_Init
+  27 000e 0028     	 cmp r0,#0
+  28 0010 03D0     	 beq .L2
+  29 0012 1348     	 ldr r0,.L14
+  30 0014 FFF7FEFF 	 bl OPTIGAprintf
+  31              	.L3:
+  32 0018 FEE7     	 b .L3
+  33              	.L2:
+  34 001a FFF7FEFF 	 bl app_menu
+  35 001e 1148     	 ldr r0,.L14+4
+  36 0020 FFF7FEFF 	 bl OPTIGAprintf
+  37              	.L5:
+  38 0024 201C     	 mov r0,r4
+  39 0026 FFF7FEFF 	 bl terminal_io_read
+  40 002a 0028     	 cmp r0,#0
+  41 002c FAD0     	 beq .L5
+  42 002e 2178     	 ldrb r1,[r4]
+  43 0030 0D48     	 ldr r0,.L14+8
+  44 0032 FFF7FEFF 	 bl OPTIGAprintf
+  45 0036 2178     	 ldrb r1,[r4]
+  46 0038 0D29     	 cmp r1,#13
+  47 003a 01D0     	 beq .L6
+  48 003c 0A29     	 cmp r1,#10
+  49 003e 05D1     	 bne .L7
+  50              	.L6:
+  51 0040 0A48     	 ldr r0,.L14+12
+  52 0042 FFF7FEFF 	 bl OPTIGAprintf
+  53 0046 FFF7FEFF 	 bl app_parse_cmd
+  54 004a EBE7     	 b .L5
+  55              	.L7:
+  56 004c 084A     	 ldr r2,.L14+16
+  57 004e 5378     	 ldrb r3,[r2,#1]
+  58 0050 D318     	 add r3,r2,r3
+  59 0052 9970     	 strb r1,[r3,#2]
+  60 0054 5378     	 ldrb r3,[r2,#1]
+  61 0056 0133     	 add r3,r3,#1
+  62 0058 DBB2     	 uxtb r3,r3
+  63 005a 5370     	 strb r3,[r2,#1]
+  64 005c E2E7     	 b .L5
+  65              	.L15:
+  66 005e C046     	 .align 2
+  67              	.L14:
+  68 0060 00000000 	 .word .LC0
+  69 0064 21000000 	 .word .LC2
+  70 0068 23000000 	 .word .LC4
+  71 006c 26000000 	 .word .LC6
+  72 0070 00000000 	 .word cmdQ
+  74              	 .comm cmdQ,514,1
+  75              	 .section .rodata.str1.1,"aMS",%progbits,1
+  76              	.LC0:
+  77 0000 44415645 	 .ascii "DAVE APPs initialization failed\012\000"
+  77      20415050 
+  77      7320696E 
+  77      69746961 
+  77      6C697A61 
+  78              	.LC2:
+  79 0021 2400     	 .ascii "$\000"
+  80              	.LC4:
+  81 0023 256300   	 .ascii "%c\000"
+  82              	.LC6:
+  83 0026 0A00     	 .ascii "\012\000"
+  84              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+    {standard input}:15     .text.startup.main:00000000 $t
+    {standard input}:20     .text.startup.main:00000000 main
+    {standard input}:68     .text.startup.main:00000060 $d
+                            *COM*:00000202 cmdQ
+
+UNDEFINED SYMBOLS
+DAVE_Init
+OPTIGAprintf
+app_menu
+terminal_io_read
+app_parse_cmd

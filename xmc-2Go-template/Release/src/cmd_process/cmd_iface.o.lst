@@ -1,0 +1,501 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "cmd_iface.c"
+  14              	 .section .text.app_menu,"ax",%progbits
+  15              	 .align 1
+  16              	 .global app_menu
+  17              	 .code 16
+  18              	 .thumb_func
+  20              	app_menu:
+  21 0000 08B5     	 push {r3,lr}
+  22 0002 1048     	 ldr r0,.L2
+  23 0004 FFF7FEFF 	 bl OPTIGAprintf
+  24 0008 0F48     	 ldr r0,.L2+4
+  25 000a FFF7FEFF 	 bl OPTIGAprintf
+  26 000e 0F48     	 ldr r0,.L2+8
+  27 0010 FFF7FEFF 	 bl OPTIGAprintf
+  28 0014 0E48     	 ldr r0,.L2+12
+  29 0016 FFF7FEFF 	 bl OPTIGAprintf
+  30 001a 0E48     	 ldr r0,.L2+16
+  31 001c FFF7FEFF 	 bl OPTIGAprintf
+  32 0020 0D48     	 ldr r0,.L2+20
+  33 0022 FFF7FEFF 	 bl OPTIGAprintf
+  34 0026 0D48     	 ldr r0,.L2+24
+  35 0028 FFF7FEFF 	 bl OPTIGAprintf
+  36 002c 0C48     	 ldr r0,.L2+28
+  37 002e FFF7FEFF 	 bl OPTIGAprintf
+  38 0032 0C48     	 ldr r0,.L2+32
+  39 0034 FFF7FEFF 	 bl OPTIGAprintf
+  40 0038 0B48     	 ldr r0,.L2+36
+  41 003a FFF7FEFF 	 bl OPTIGAprintf
+  42              	 
+  43 003e 0020     	 mov r0,#0
+  44 0040 08BD     	 pop {r3,pc}
+  45              	.L3:
+  46 0042 C046     	 .align 2
+  47              	.L2:
+  48 0044 00000000 	 .word .LC0
+  49 0048 09000000 	 .word .LC2
+  50 004c 64000000 	 .word .LC4
+  51 0050 C5000000 	 .word .LC6
+  52 0054 1D010000 	 .word .LC8
+  53 0058 67010000 	 .word .LC10
+  54 005c B9010000 	 .word .LC12
+  55 0060 0E020000 	 .word .LC14
+  56 0064 68020000 	 .word .LC16
+  57 0068 C1020000 	 .word .LC18
+  59              	 .section .text.parse_cmd,"ax",%progbits
+  60              	 .align 1
+  61              	 .global parse_cmd
+  62              	 .code 16
+  63              	 .thumb_func
+  65              	parse_cmd:
+  66 0000 10B5     	 push {r4,lr}
+  67 0002 2349     	 ldr r1,.L42
+  68 0004 041C     	 mov r4,r0
+  69 0006 FFF7FEFF 	 bl strcmp
+  70 000a 0028     	 cmp r0,#0
+  71 000c 02D1     	 bne .L5
+  72 000e FFF7FEFF 	 bl app_menu
+  73 0012 3AE0     	 b .L6
+  74              	.L5:
+  75 0014 201C     	 mov r0,r4
+  76 0016 1F49     	 ldr r1,.L42+4
+  77 0018 FFF7FEFF 	 bl strcmp
+  78 001c 0028     	 cmp r0,#0
+  79 001e 34D0     	 beq .L6
+  80 0020 201C     	 mov r0,r4
+  81 0022 1D49     	 ldr r1,.L42+8
+  82 0024 FFF7FEFF 	 bl strcmp
+  83 0028 0028     	 cmp r0,#0
+  84 002a 2ED0     	 beq .L6
+  85 002c 201C     	 mov r0,r4
+  86 002e 1B49     	 ldr r1,.L42+12
+  87 0030 FFF7FEFF 	 bl strcmp
+  88 0034 0028     	 cmp r0,#0
+  89 0036 28D0     	 beq .L6
+  90 0038 201C     	 mov r0,r4
+  91 003a 1949     	 ldr r1,.L42+16
+  92 003c FFF7FEFF 	 bl strcmp
+  93 0040 0028     	 cmp r0,#0
+  94 0042 22D0     	 beq .L6
+  95 0044 201C     	 mov r0,r4
+  96 0046 1749     	 ldr r1,.L42+20
+  97 0048 FFF7FEFF 	 bl strcmp
+  98 004c 0028     	 cmp r0,#0
+  99 004e 03D1     	 bne .L11
+ 100              	.L12:
+ 101 0050 1548     	 ldr r0,.L42+24
+ 102 0052 FFF7FEFF 	 bl OPTIGAprintf
+ 103 0056 18E0     	 b .L6
+ 104              	.L11:
+ 105 0058 201C     	 mov r0,r4
+ 106 005a 1449     	 ldr r1,.L42+28
+ 107 005c FFF7FEFF 	 bl strcmp
+ 108 0060 0028     	 cmp r0,#0
+ 109 0062 F5D0     	 beq .L12
+ 110 0064 201C     	 mov r0,r4
+ 111 0066 1249     	 ldr r1,.L42+32
+ 112 0068 FFF7FEFF 	 bl strcmp
+ 113 006c 0028     	 cmp r0,#0
+ 114 006e 0CD0     	 beq .L6
+ 115 0070 201C     	 mov r0,r4
+ 116 0072 1049     	 ldr r1,.L42+36
+ 117 0074 FFF7FEFF 	 bl strcmp
+ 118 0078 0028     	 cmp r0,#0
+ 119 007a 06D0     	 beq .L6
+ 120 007c 2378     	 ldrb r3,[r4]
+ 121 007e 002B     	 cmp r3,#0
+ 122 0080 03D0     	 beq .L6
+ 123 0082 0D48     	 ldr r0,.L42+40
+ 124 0084 211C     	 mov r1,r4
+ 125 0086 FFF7FEFF 	 bl OPTIGAprintf
+ 126              	.L6:
+ 127 008a 0020     	 mov r0,#0
+ 128              	 
+ 129 008c 10BD     	 pop {r4,pc}
+ 130              	.L43:
+ 131 008e C046     	 .align 2
+ 132              	.L42:
+ 133 0090 C4020000 	 .word .LC20
+ 134 0094 C9020000 	 .word .LC22
+ 135 0098 F5020000 	 .word .LC26
+ 136 009c 27030000 	 .word .LC30
+ 137 00a0 5B030000 	 .word .LC34
+ 138 00a4 8B030000 	 .word .LC38
+ 139 00a8 BD030000 	 .word .LC42
+ 140 00ac D2030000 	 .word .LC44
+ 141 00b0 E7030000 	 .word .LC46
+ 142 00b4 18040000 	 .word .LC50
+ 143 00b8 52040000 	 .word .LC54
+ 145              	 .section .text.optx_get_rng,"ax",%progbits
+ 146              	 .align 1
+ 147              	 .global optx_get_rng
+ 148              	 .code 16
+ 149              	 .thumb_func
+ 151              	optx_get_rng:
+ 152              	 
+ 153 0000 7047     	 bx lr
+ 155              	 .section .text.optx_get_sha256,"ax",%progbits
+ 156              	 .align 1
+ 157              	 .global optx_get_sha256
+ 158              	 .code 16
+ 159              	 .thumb_func
+ 161              	optx_get_sha256:
+ 162              	 
+ 163 0000 7047     	 bx lr
+ 165              	 .section .text.optx_genKey_pair,"ax",%progbits
+ 166              	 .align 1
+ 167              	 .global optx_genKey_pair
+ 168              	 .code 16
+ 169              	 .thumb_func
+ 171              	optx_genKey_pair:
+ 172              	 
+ 173 0000 7047     	 bx lr
+ 175              	 .section .text.optx_sign_hash,"ax",%progbits
+ 176              	 .align 1
+ 177              	 .global optx_sign_hash
+ 178              	 .code 16
+ 179              	 .thumb_func
+ 181              	optx_sign_hash:
+ 182              	 
+ 183 0000 7047     	 bx lr
+ 185              	 .section .text.optx_verify_sig,"ax",%progbits
+ 186              	 .align 1
+ 187              	 .global optx_verify_sig
+ 188              	 .code 16
+ 189              	 .thumb_func
+ 191              	optx_verify_sig:
+ 192              	 
+ 193 0000 7047     	 bx lr
+ 195              	 .section .text.optx_sign_verify_sig,"ax",%progbits
+ 196              	 .align 1
+ 197              	 .global optx_sign_verify_sig
+ 198              	 .code 16
+ 199              	 .thumb_func
+ 201              	optx_sign_verify_sig:
+ 202              	 
+ 203 0000 7047     	 bx lr
+ 205              	 .section .text.optx_ecdh_derive_key,"ax",%progbits
+ 206              	 .align 1
+ 207              	 .global optx_ecdh_derive_key
+ 208              	 .code 16
+ 209              	 .thumb_func
+ 211              	optx_ecdh_derive_key:
+ 212              	 
+ 213 0000 7047     	 bx lr
+ 215              	 .section .text.optx_read_ifx_cert,"ax",%progbits
+ 216              	 .align 1
+ 217              	 .global optx_read_ifx_cert
+ 218              	 .code 16
+ 219              	 .thumb_func
+ 221              	optx_read_ifx_cert:
+ 222              	 
+ 223 0000 7047     	 bx lr
+ 225              	 .section .text.app_parse_cmd,"ax",%progbits
+ 226              	 .align 1
+ 227              	 .global app_parse_cmd
+ 228              	 .code 16
+ 229              	 .thumb_func
+ 231              	app_parse_cmd:
+ 232 0000 37B5     	 push {r0,r1,r2,r4,r5,lr}
+ 233 0002 0021     	 mov r1,#0
+ 234              	.L53:
+ 235 0004 114B     	 ldr r3,.L57
+ 236 0006 8AB2     	 uxth r2,r1
+ 237 0008 5D78     	 ldrb r5,[r3,#1]
+ 238 000a 1C78     	 ldrb r4,[r3]
+ 239 000c 1048     	 ldr r0,.L57+4
+ 240 000e A542     	 cmp r5,r4
+ 241 0010 13D0     	 beq .L54
+ 242 0012 0222     	 mov r2,#2
+ 243 0014 4D1C     	 add r5,r1,#1
+ 244 0016 FF32     	 add r2,r2,#255
+ 245 0018 9542     	 cmp r5,r2
+ 246 001a 0DD0     	 beq .L56
+ 247 001c 6C46     	 mov r4,sp
+ 248 001e 1A78     	 ldrb r2,[r3]
+ 249 0020 9A18     	 add r2,r3,r2
+ 250 0022 9278     	 ldrb r2,[r2,#2]
+ 251 0024 D2B2     	 uxtb r2,r2
+ 252 0026 E271     	 strb r2,[r4,#7]
+ 253 0028 1A78     	 ldrb r2,[r3]
+ 254 002a 0132     	 add r2,r2,#1
+ 255 002c D2B2     	 uxtb r2,r2
+ 256 002e 1A70     	 strb r2,[r3]
+ 257 0030 E379     	 ldrb r3,[r4,#7]
+ 258 0032 4354     	 strb r3,[r0,r1]
+ 259 0034 291C     	 mov r1,r5
+ 260 0036 E5E7     	 b .L53
+ 261              	.L56:
+ 262 0038 013A     	 sub r2,r2,#1
+ 263              	.L54:
+ 264 003a 0024     	 mov r4,#0
+ 265 003c 8454     	 strb r4,[r0,r2]
+ 266 003e FFF7FEFF 	 bl parse_cmd
+ 267 0042 0448     	 ldr r0,.L57+8
+ 268 0044 FFF7FEFF 	 bl OPTIGAprintf
+ 269              	 
+ 270 0048 201C     	 mov r0,r4
+ 271 004a 3EBD     	 pop {r1,r2,r3,r4,r5,pc}
+ 272              	.L58:
+ 273              	 .align 2
+ 274              	.L57:
+ 275 004c 00000000 	 .word cmdQ
+ 276 0050 00000000 	 .word .LANCHOR0
+ 277 0054 72040000 	 .word .LC61
+ 279              	 .comm cmdbytes,128,1
+ 280              	 .comm cmdQ,514,1
+ 281              	 .section .rodata.str1.1,"aMS",%progbits,1
+ 282              	.LC0:
+ 283 0000 55736167 	 .ascii "Usage:\012\015\000"
+ 283      653A0A0D 
+ 283      00
+ 284              	.LC2:
+ 285 0009 6F707478 	 .ascii "optx_get_rng            ......................Optig"
+ 285      5F676574 
+ 285      5F726E67 
+ 285      20202020 
+ 285      20202020 
+ 286 003c 61205472 	 .ascii "a Trust X generates a 32 bit True RNG\012\015\000"
+ 286      75737420 
+ 286      58206765 
+ 286      6E657261 
+ 286      74657320 
+ 287              	.LC4:
+ 288 0064 6F707478 	 .ascii "optx_get_sha256         ......................Optig"
+ 288      5F676574 
+ 288      5F736861 
+ 288      32353620 
+ 288      20202020 
+ 289 0097 61205472 	 .ascii "a Trust X performs a SHA256 hash of message\012\015"
+ 289      75737420 
+ 289      58207065 
+ 289      72666F72 
+ 289      6D732061 
+ 290 00c4 00       	 .ascii "\000"
+ 291              	.LC6:
+ 292 00c5 6F707478 	 .ascii "optx_genKey_pair        ......................Optig"
+ 292      5F67656E 
+ 292      4B65795F 
+ 292      70616972 
+ 292      20202020 
+ 293 00f8 61205472 	 .ascii "a Trust X generates ECC256 KeyPair\012\015\000"
+ 293      75737420 
+ 293      58206765 
+ 293      6E657261 
+ 293      74657320 
+ 294              	.LC8:
+ 295 011d 6F707478 	 .ascii "optx_sign_hash          ......................Optig"
+ 295      5F736967 
+ 295      6E5F6861 
+ 295      73682020 
+ 295      20202020 
+ 296 0150 61205472 	 .ascii "a Trust X signs hash\012\015\000"
+ 296      75737420 
+ 296      58207369 
+ 296      676E7320 
+ 296      68617368 
+ 297              	.LC10:
+ 298 0167 6F707478 	 .ascii "optx_verify_sig         ......................Optig"
+ 298      5F766572 
+ 298      6966795F 
+ 298      73696720 
+ 298      20202020 
+ 299 019a 61205472 	 .ascii "a Trust X verifies signature\012\015\000"
+ 299      75737420 
+ 299      58207665 
+ 299      72696669 
+ 299      65732073 
+ 300              	.LC12:
+ 301 01b9 6F707478 	 .ascii "optx_sign_verify_sig    ......................Optig"
+ 301      5F736967 
+ 301      6E5F7665 
+ 301      72696679 
+ 301      5F736967 
+ 302 01ec 61205472 	 .ascii "a Trust X sign & verify process\012\015\000"
+ 302      75737420 
+ 302      58207369 
+ 302      676E2026 
+ 302      20766572 
+ 303              	.LC14:
+ 304 020e 6F707478 	 .ascii "optx_ecdh_derive_key    ......................Optig"
+ 304      5F656364 
+ 304      685F6465 
+ 304      72697665 
+ 304      5F6B6579 
+ 305 0241 61205472 	 .ascii "a Trust X creates ECDH shared secret\012\015\000"
+ 305      75737420 
+ 305      58206372 
+ 305      65617465 
+ 305      73204543 
+ 306              	.LC16:
+ 307 0268 6F707478 	 .ascii "optx_read_ifx_cert      ......................Readi"
+ 307      5F726561 
+ 307      645F6966 
+ 307      785F6365 
+ 307      72742020 
+ 308 029b 6E672049 	 .ascii "ng Infineon Endorsement Certificate\012\015\000"
+ 308      6E66696E 
+ 308      656F6E20 
+ 308      456E646F 
+ 308      7273656D 
+ 309              	.LC18:
+ 310 02c1 0A0D00   	 .ascii "\012\015\000"
+ 311              	.LC20:
+ 312 02c4 68656C70 	 .ascii "help\000"
+ 312      00
+ 313              	.LC22:
+ 314 02c9 6F707478 	 .ascii "optx_get_rng\000"
+ 314      5F676574 
+ 314      5F726E67 
+ 314      00
+ 315              	.LC24:
+ 316 02d6 4661696C 	 .ascii "Fail to execute optx_get_rng\012\015\000"
+ 316      20746F20 
+ 316      65786563 
+ 316      75746520 
+ 316      6F707478 
+ 317              	.LC26:
+ 318 02f5 6F707478 	 .ascii "optx_get_sha256\000"
+ 318      5F676574 
+ 318      5F736861 
+ 318      32353600 
+ 319              	.LC28:
+ 320 0305 4661696C 	 .ascii "Fail to execute optx_get_sha256\012\015\000"
+ 320      20746F20 
+ 320      65786563 
+ 320      75746520 
+ 320      6F707478 
+ 321              	.LC30:
+ 322 0327 6F707478 	 .ascii "optx_genKey_pair\000"
+ 322      5F67656E 
+ 322      4B65795F 
+ 322      70616972 
+ 322      00
+ 323              	.LC32:
+ 324 0338 4661696C 	 .ascii "Fail to execute optx_genKey_pair\012\015\000"
+ 324      20746F20 
+ 324      65786563 
+ 324      75746520 
+ 324      6F707478 
+ 325              	.LC34:
+ 326 035b 6F707478 	 .ascii "optx_sign_hash\000"
+ 326      5F736967 
+ 326      6E5F6861 
+ 326      736800
+ 327              	.LC36:
+ 328 036a 4661696C 	 .ascii "Fail to execute optx_sign_hash\012\015\000"
+ 328      20746F20 
+ 328      65786563 
+ 328      75746520 
+ 328      6F707478 
+ 329              	.LC38:
+ 330 038b 6F707478 	 .ascii "optx_verify_sig\000"
+ 330      5F766572 
+ 330      6966795F 
+ 330      73696700 
+ 331              	.LC40:
+ 332 039b 4661696C 	 .ascii "Fail to execute optx_verify_sig\012\015\000"
+ 332      20746F20 
+ 332      65786563 
+ 332      75746520 
+ 332      6F707478 
+ 333              	.LC42:
+ 334 03bd 5369676E 	 .ascii "Signature Verified\012\015\000"
+ 334      61747572 
+ 334      65205665 
+ 334      72696669 
+ 334      65640A0D 
+ 335              	.LC44:
+ 336 03d2 6F707478 	 .ascii "optx_sign_verify_sig\000"
+ 336      5F736967 
+ 336      6E5F7665 
+ 336      72696679 
+ 336      5F736967 
+ 337              	.LC46:
+ 338 03e7 6F707478 	 .ascii "optx_ecdh_derive_key\000"
+ 338      5F656364 
+ 338      685F6465 
+ 338      72697665 
+ 338      5F6B6579 
+ 339              	.LC48:
+ 340 03fc 4661696C 	 .ascii "Fail to execute optx_echd\012\015\000"
+ 340      20746F20 
+ 340      65786563 
+ 340      75746520 
+ 340      6F707478 
+ 341              	.LC50:
+ 342 0418 6F707478 	 .ascii "optx_read_ifx_cert\000"
+ 342      5F726561 
+ 342      645F6966 
+ 342      785F6365 
+ 342      727400
+ 343              	.LC52:
+ 344 042b 4661696C 	 .ascii "Fail to read endorsement certificate\012\015\000"
+ 344      20746F20 
+ 344      72656164 
+ 344      20656E64 
+ 344      6F727365 
+ 345              	.LC54:
+ 346 0452 0D0A5379 	 .ascii "\015\012Syntax error in command: %s\015\012\000"
+ 346      6E746178 
+ 346      20657272 
+ 346      6F722069 
+ 346      6E20636F 
+ 347              	.LC61:
+ 348 0472 242000   	 .ascii "$ \000"
+ 349              	 .section .bss.cmd.7083,"aw",%nobits
+ 350              	 .set .LANCHOR0,.+0
+ 353              	cmd.7083:
+ 354 0000 00000000 	 .space 256
+ 354      00000000 
+ 354      00000000 
+ 354      00000000 
+ 354      00000000 
+ 355              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 cmd_iface.c
+    {standard input}:15     .text.app_menu:00000000 $t
+    {standard input}:20     .text.app_menu:00000000 app_menu
+    {standard input}:48     .text.app_menu:00000044 $d
+    {standard input}:60     .text.parse_cmd:00000000 $t
+    {standard input}:65     .text.parse_cmd:00000000 parse_cmd
+    {standard input}:133    .text.parse_cmd:00000090 $d
+    {standard input}:146    .text.optx_get_rng:00000000 $t
+    {standard input}:151    .text.optx_get_rng:00000000 optx_get_rng
+    {standard input}:156    .text.optx_get_sha256:00000000 $t
+    {standard input}:161    .text.optx_get_sha256:00000000 optx_get_sha256
+    {standard input}:166    .text.optx_genKey_pair:00000000 $t
+    {standard input}:171    .text.optx_genKey_pair:00000000 optx_genKey_pair
+    {standard input}:176    .text.optx_sign_hash:00000000 $t
+    {standard input}:181    .text.optx_sign_hash:00000000 optx_sign_hash
+    {standard input}:186    .text.optx_verify_sig:00000000 $t
+    {standard input}:191    .text.optx_verify_sig:00000000 optx_verify_sig
+    {standard input}:196    .text.optx_sign_verify_sig:00000000 $t
+    {standard input}:201    .text.optx_sign_verify_sig:00000000 optx_sign_verify_sig
+    {standard input}:206    .text.optx_ecdh_derive_key:00000000 $t
+    {standard input}:211    .text.optx_ecdh_derive_key:00000000 optx_ecdh_derive_key
+    {standard input}:216    .text.optx_read_ifx_cert:00000000 $t
+    {standard input}:221    .text.optx_read_ifx_cert:00000000 optx_read_ifx_cert
+    {standard input}:226    .text.app_parse_cmd:00000000 $t
+    {standard input}:231    .text.app_parse_cmd:00000000 app_parse_cmd
+    {standard input}:275    .text.app_parse_cmd:0000004c $d
+                            *COM*:00000202 cmdQ
+                            *COM*:00000080 cmdbytes
+    {standard input}:353    .bss.cmd.7083:00000000 cmd.7083
+    {standard input}:354    .bss.cmd.7083:00000000 $d
+
+UNDEFINED SYMBOLS
+OPTIGAprintf
+strcmp

@@ -61,8 +61,8 @@ xmc2go-TrustX.siz \
 LIST_FILES = $(addsuffix .o.lst, $(basename $(OBJS))) 
 MAP_FILE = "xmc2go-TrustX.map"
 
-TOOLCHAIN_ROOT=C:/DAVE_4-4-2_64bit/DAVE-IDE-4.4.2-64Bit/eclipse/ARM-GCC-49
-PROJECT_LOC=C:/Workspace/DAVE-4.4.2-64Bit/Temp/xmc2go-TrustX
+TOOLCHAIN_ROOT=C:/DAVEv4-64Bit/DAVE-IDE-4.4.2-64Bit/eclipse/ARM-GCC-49
+PROJECT_LOC=C:/Workspaces/DSS-Training/technical-training-optiga-trust-x/xmc-2Go-TrustX-solution
 
 # All Target
 all: xmc2go-TrustX.elf secondary-outputs

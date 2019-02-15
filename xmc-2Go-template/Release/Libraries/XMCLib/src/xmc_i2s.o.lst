@@ -1,0 +1,343 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "xmc_i2s.c"
+  14              	 .section .text.XMC_I2S_CH_SetBaudrate,"ax",%progbits
+  15              	 .align 1
+  16              	 .global XMC_I2S_CH_SetBaudrate
+  17              	 .code 16
+  18              	 .thumb_func
+  20              	XMC_I2S_CH_SetBaudrate:
+  21 0000 38B5     	 push {r3,r4,r5,lr}
+  22 0002 041C     	 mov r4,r0
+  23 0004 0D1C     	 mov r5,r1
+  24 0006 FFF7FEFF 	 bl XMC_SCU_CLOCK_GetPeripheralClockFrequency
+  25 000a 4008     	 lsr r0,r0,#1
+  26 000c 8542     	 cmp r5,r0
+  27 000e 01D9     	 bls .L2
+  28              	.L4:
+  29 0010 0120     	 mov r0,#1
+  30 0012 0CE0     	 b .L3
+  31              	.L2:
+  32 0014 201C     	 mov r0,r4
+  33 0016 291C     	 mov r1,r5
+  34 0018 0422     	 mov r2,#4
+  35 001a FFF7FEFF 	 bl XMC_USIC_CH_SetBaudrate
+  36 001e 0028     	 cmp r0,#0
+  37 0020 F6D1     	 bne .L4
+  38 0022 D022     	 mov r2,#208
+  39 0024 6369     	 ldr r3,[r4,#20]
+  40 0026 9343     	 bic r3,r2
+  41 0028 403A     	 sub r2,r2,#64
+  42 002a 1343     	 orr r3,r2
+  43 002c 6361     	 str r3,[r4,#20]
+  44              	.L3:
+  45              	 
+  46 002e 38BD     	 pop {r3,r4,r5,pc}
+  48              	 .section .text.XMC_I2S_CH_SetSystemWordLength,"ax",%progbits
+  49              	 .align 1
+  50              	 .global XMC_I2S_CH_SetSystemWordLength
+  51              	 .code 16
+  52              	 .thumb_func
+  54              	XMC_I2S_CH_SetSystemWordLength:
+  55 0000 0123     	 mov r3,#1
+  56 0002 4022     	 mov r2,#64
+  57 0004 F0B5     	 push {r4,r5,r6,r7,lr}
+  58 0006 87B0     	 sub sp,sp,#28
+  59 0008 0292     	 str r2,[sp,#8]
+  60 000a 8C46     	 mov ip,r1
+  61 000c 1A1C     	 mov r2,r3
+  62 000e 0490     	 str r0,[sp,#16]
+  63 0010 0193     	 str r3,[sp,#4]
+  64              	.L7:
+  65 0012 D9B2     	 uxtb r1,r3
+  66 0014 4C42     	 neg r4,r1
+  67 0016 E0B2     	 uxtb r0,r4
+  68 0018 0590     	 str r0,[sp,#20]
+  69 001a 6C46     	 mov r4,sp
+  70 001c 6046     	 mov r0,ip
+  71 001e 2073     	 strb r0,[r4,#12]
+  72 0020 207B     	 ldrb r0,[r4,#12]
+  73 0022 1E1C     	 mov r6,r3
+  74 0024 0124     	 mov r4,#1
+  75 0026 451A     	 sub r5,r0,r1
+  76 0028 0390     	 str r0,[sp,#12]
+  77 002a EDB2     	 uxtb r5,r5
+  78              	.L11:
+  79 002c 6645     	 cmp r6,ip
+  80 002e 14D0     	 beq .L13
+  81 0030 2F1C     	 mov r7,r5
+  82 0032 6645     	 cmp r6,ip
+  83 0034 02D9     	 bls .L9
+  84 0036 039F     	 ldr r7,[sp,#12]
+  85 0038 F71B     	 sub r7,r6,r7
+  86 003a FFB2     	 uxtb r7,r7
+  87              	.L9:
+  88 003c 0298     	 ldr r0,[sp,#8]
+  89 003e 8742     	 cmp r7,r0
+  90 0040 02D2     	 bcs .L10
+  91 0042 0A1C     	 mov r2,r1
+  92 0044 0297     	 str r7,[sp,#8]
+  93 0046 0194     	 str r4,[sp,#4]
+  94              	.L10:
+  95 0048 0598     	 ldr r0,[sp,#20]
+  96 004a 0134     	 add r4,r4,#1
+  97 004c 2D18     	 add r5,r5,r0
+  98 004e E4B2     	 uxtb r4,r4
+  99 0050 F618     	 add r6,r6,r3
+ 100 0052 EDB2     	 uxtb r5,r5
+ 101 0054 052C     	 cmp r4,#5
+ 102 0056 E9D1     	 bne .L11
+ 103 0058 01E0     	 b .L8
+ 104              	.L13:
+ 105 005a 0A1C     	 mov r2,r1
+ 106 005c 0194     	 str r4,[sp,#4]
+ 107              	.L8:
+ 108 005e 0133     	 add r3,r3,#1
+ 109 0060 212B     	 cmp r3,#33
+ 110 0062 D6D1     	 bne .L7
+ 111 0064 049B     	 ldr r3,[sp,#16]
+ 112 0066 013A     	 sub r2,r2,#1
+ 113 0068 5969     	 ldr r1,[r3,#20]
+ 114 006a 019B     	 ldr r3,[sp,#4]
+ 115 006c 9202     	 lsl r2,r2,#10
+ 116 006e 013B     	 sub r3,r3,#1
+ 117 0070 1B02     	 lsl r3,r3,#8
+ 118 0072 1A43     	 orr r2,r3
+ 119 0074 034B     	 ldr r3,.L15
+ 120 0076 0B40     	 and r3,r1
+ 121 0078 1A43     	 orr r2,r3
+ 122 007a 049B     	 ldr r3,[sp,#16]
+ 123 007c 5A61     	 str r2,[r3,#20]
+ 124 007e 07B0     	 add sp,sp,#28
+ 125              	 
+ 126 0080 F0BD     	 pop {r4,r5,r6,r7,pc}
+ 127              	.L16:
+ 128 0082 C046     	 .align 2
+ 129              	.L15:
+ 130 0084 FF80FFFF 	 .word -32513
+ 132              	 .section .text.XMC_I2S_CH_Init,"ax",%progbits
+ 133              	 .align 1
+ 134              	 .global XMC_I2S_CH_Init
+ 135              	 .code 16
+ 136              	 .thumb_func
+ 138              	XMC_I2S_CH_Init:
+ 139 0000 38B5     	 push {r3,r4,r5,lr}
+ 140 0002 0D1C     	 mov r5,r1
+ 141 0004 041C     	 mov r4,r0
+ 142 0006 FFF7FEFF 	 bl XMC_USIC_CH_Enable
+ 143 000a 2B7A     	 ldrb r3,[r5,#8]
+ 144 000c 002B     	 cmp r3,#0
+ 145 000e 03D1     	 bne .L18
+ 146 0010 201C     	 mov r0,r4
+ 147 0012 2968     	 ldr r1,[r5]
+ 148 0014 FFF7FEFF 	 bl XMC_I2S_CH_SetBaudrate
+ 149              	.L18:
+ 150 0018 6B79     	 ldrb r3,[r5,#5]
+ 151 001a 2A79     	 ldrb r2,[r5,#4]
+ 152 001c 013B     	 sub r3,r3,#1
+ 153 001e 1904     	 lsl r1,r3,#16
+ 154 0020 531E     	 sub r3,r2,#1
+ 155 0022 1B06     	 lsl r3,r3,#24
+ 156 0024 104A     	 ldr r2,.L20
+ 157 0026 0B43     	 orr r3,r1
+ 158 0028 1343     	 orr r3,r2
+ 159 002a 6363     	 str r3,[r4,#52]
+ 160 002c A26B     	 ldr r2,[r4,#56]
+ 161 002e 0F4B     	 ldr r3,.L20+4
+ 162 0030 1340     	 and r3,r2
+ 163 0032 A122     	 mov r2,#161
+ 164 0034 D200     	 lsl r2,r2,#3
+ 165 0036 1343     	 orr r3,r2
+ 166 0038 A363     	 str r3,[r4,#56]
+ 167 003a 2B7A     	 ldrb r3,[r5,#8]
+ 168 003c 002B     	 cmp r3,#0
+ 169 003e 01D1     	 bne .L19
+ 170 0040 0133     	 add r3,r3,#1
+ 171 0042 E363     	 str r3,[r4,#60]
+ 172              	.L19:
+ 173 0044 0221     	 mov r1,#2
+ 174 0046 EB79     	 ldrb r3,[r5,#7]
+ 175 0048 E26B     	 ldr r2,[r4,#60]
+ 176 004a 0B43     	 orr r3,r1
+ 177 004c 1343     	 orr r3,r2
+ 178 004e AA79     	 ldrb r2,[r5,#6]
+ 179 0050 201C     	 mov r0,r4
+ 180 0052 013A     	 sub r2,r2,#1
+ 181 0054 1204     	 lsl r2,r2,#16
+ 182 0056 1343     	 orr r3,r2
+ 183 0058 E363     	 str r3,[r4,#60]
+ 184 005a 6979     	 ldrb r1,[r5,#5]
+ 185 005c FFF7FEFF 	 bl XMC_I2S_CH_SetSystemWordLength
+ 186 0060 0123     	 mov r3,#1
+ 187 0062 5B42     	 neg r3,r3
+ 188 0064 E364     	 str r3,[r4,#76]
+ 189              	 
+ 190 0066 38BD     	 pop {r3,r4,r5,pc}
+ 191              	.L21:
+ 192              	 .align 2
+ 193              	.L20:
+ 194 0068 01030000 	 .word 769
+ 195 006c E0FAFFFF 	 .word -1312
+ 197              	 .section .text.XMC_I2S_CH_Transmit,"ax",%progbits
+ 198              	 .align 1
+ 199              	 .global XMC_I2S_CH_Transmit
+ 200              	 .code 16
+ 201              	 .thumb_func
+ 203              	XMC_I2S_CH_Transmit:
+ 204 0000 031C     	 mov r3,r0
+ 205 0002 FC33     	 add r3,r3,#252
+ 206 0004 10B5     	 push {r4,lr}
+ 207 0006 DC68     	 ldr r4,[r3,#12]
+ 208 0008 E023     	 mov r3,#224
+ 209 000a DB04     	 lsl r3,r3,#19
+ 210 000c 1C42     	 tst r4,r3
+ 211 000e 0DD1     	 bne .L23
+ 212              	.L24:
+ 213 0010 7F24     	 mov r4,#127
+ 214 0012 836B     	 ldr r3,[r0,#56]
+ 215 0014 A343     	 bic r3,r4
+ 216 0016 DBB2     	 uxtb r3,r3
+ 217 0018 802B     	 cmp r3,#128
+ 218 001a F9D0     	 beq .L24
+ 219 001c 8024     	 mov r4,#128
+ 220 001e C36C     	 ldr r3,[r0,#76]
+ 221 0020 A401     	 lsl r4,r4,#6
+ 222 0022 2343     	 orr r3,r4
+ 223 0024 9201     	 lsl r2,r2,#6
+ 224 0026 C364     	 str r3,[r0,#76]
+ 225 0028 8032     	 add r2,r2,#128
+ 226 002a 02E0     	 b .L27
+ 227              	.L23:
+ 228 002c 9201     	 lsl r2,r2,#6
+ 229 002e 8132     	 add r2,r2,#129
+ 230 0030 FF32     	 add r2,r2,#255
+ 231              	.L27:
+ 232 0032 1150     	 str r1,[r2,r0]
+ 233              	 
+ 234 0034 10BD     	 pop {r4,pc}
+ 236              	 .section .text.XMC_I2S_CH_GetReceivedData,"ax",%progbits
+ 237              	 .align 1
+ 238              	 .global XMC_I2S_CH_GetReceivedData
+ 239              	 .code 16
+ 240              	 .thumb_func
+ 242              	XMC_I2S_CH_GetReceivedData:
+ 243 0000 031C     	 mov r3,r0
+ 244 0002 E022     	 mov r2,#224
+ 245 0004 FC33     	 add r3,r3,#252
+ 246 0006 1969     	 ldr r1,[r3,#16]
+ 247 0008 D204     	 lsl r2,r2,#19
+ 248 000a 1142     	 tst r1,r2
+ 249 000c 01D1     	 bne .L29
+ 250 000e 406D     	 ldr r0,[r0,#84]
+ 251 0010 00E0     	 b .L31
+ 252              	.L29:
+ 253 0012 186A     	 ldr r0,[r3,#32]
+ 254              	.L31:
+ 255 0014 80B2     	 uxth r0,r0
+ 256              	 
+ 257 0016 7047     	 bx lr
+ 259              	 .section .text.XMC_I2S_CH_Stop,"ax",%progbits
+ 260              	 .align 1
+ 261              	 .global XMC_I2S_CH_Stop
+ 262              	 .code 16
+ 263              	 .thumb_func
+ 265              	XMC_I2S_CH_Stop:
+ 266 0000 826B     	 ldr r2,[r0,#56]
+ 267 0002 031C     	 mov r3,r0
+ 268 0004 0220     	 mov r0,#2
+ 269 0006 1206     	 lsl r2,r2,#24
+ 270 0008 04D4     	 bmi .L33
+ 271 000a 0F21     	 mov r1,#15
+ 272 000c 0020     	 mov r0,#0
+ 273 000e 1A6C     	 ldr r2,[r3,#64]
+ 274 0010 8A43     	 bic r2,r1
+ 275 0012 1A64     	 str r2,[r3,#64]
+ 276              	.L33:
+ 277              	 
+ 278 0014 7047     	 bx lr
+ 280              	 .section .text.XMC_I2S_CH_EnableEvent,"ax",%progbits
+ 281              	 .align 1
+ 282              	 .global XMC_I2S_CH_EnableEvent
+ 283              	 .code 16
+ 284              	 .thumb_func
+ 286              	XMC_I2S_CH_EnableEvent:
+ 287 0000 FE23     	 mov r3,#254
+ 288 0002 026C     	 ldr r2,[r0,#64]
+ 289 0004 5B02     	 lsl r3,r3,#9
+ 290 0006 0B40     	 and r3,r1
+ 291 0008 1343     	 orr r3,r2
+ 292 000a 0364     	 str r3,[r0,#64]
+ 293 000c 034A     	 ldr r2,.L36
+ 294 000e C36B     	 ldr r3,[r0,#60]
+ 295 0010 8908     	 lsr r1,r1,#2
+ 296 0012 1140     	 and r1,r2
+ 297 0014 1943     	 orr r1,r3
+ 298 0016 C163     	 str r1,[r0,#60]
+ 299              	 
+ 300 0018 7047     	 bx lr
+ 301              	.L37:
+ 302 001a C046     	 .align 2
+ 303              	.L36:
+ 304 001c 70800000 	 .word 32880
+ 306              	 .section .text.XMC_I2S_CH_DisableEvent,"ax",%progbits
+ 307              	 .align 1
+ 308              	 .global XMC_I2S_CH_DisableEvent
+ 309              	 .code 16
+ 310              	 .thumb_func
+ 312              	XMC_I2S_CH_DisableEvent:
+ 313 0000 FE22     	 mov r2,#254
+ 314 0002 036C     	 ldr r3,[r0,#64]
+ 315 0004 5202     	 lsl r2,r2,#9
+ 316 0006 0A40     	 and r2,r1
+ 317 0008 9343     	 bic r3,r2
+ 318 000a 0364     	 str r3,[r0,#64]
+ 319 000c 034A     	 ldr r2,.L39
+ 320 000e C36B     	 ldr r3,[r0,#60]
+ 321 0010 8908     	 lsr r1,r1,#2
+ 322 0012 1140     	 and r1,r2
+ 323 0014 8B43     	 bic r3,r1
+ 324 0016 C363     	 str r3,[r0,#60]
+ 325              	 
+ 326 0018 7047     	 bx lr
+ 327              	.L40:
+ 328 001a C046     	 .align 2
+ 329              	.L39:
+ 330 001c 70800000 	 .word 32880
+ 332              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 xmc_i2s.c
+    {standard input}:15     .text.XMC_I2S_CH_SetBaudrate:00000000 $t
+    {standard input}:20     .text.XMC_I2S_CH_SetBaudrate:00000000 XMC_I2S_CH_SetBaudrate
+    {standard input}:49     .text.XMC_I2S_CH_SetSystemWordLength:00000000 $t
+    {standard input}:54     .text.XMC_I2S_CH_SetSystemWordLength:00000000 XMC_I2S_CH_SetSystemWordLength
+    {standard input}:130    .text.XMC_I2S_CH_SetSystemWordLength:00000084 $d
+    {standard input}:133    .text.XMC_I2S_CH_Init:00000000 $t
+    {standard input}:138    .text.XMC_I2S_CH_Init:00000000 XMC_I2S_CH_Init
+    {standard input}:194    .text.XMC_I2S_CH_Init:00000068 $d
+    {standard input}:198    .text.XMC_I2S_CH_Transmit:00000000 $t
+    {standard input}:203    .text.XMC_I2S_CH_Transmit:00000000 XMC_I2S_CH_Transmit
+    {standard input}:237    .text.XMC_I2S_CH_GetReceivedData:00000000 $t
+    {standard input}:242    .text.XMC_I2S_CH_GetReceivedData:00000000 XMC_I2S_CH_GetReceivedData
+    {standard input}:260    .text.XMC_I2S_CH_Stop:00000000 $t
+    {standard input}:265    .text.XMC_I2S_CH_Stop:00000000 XMC_I2S_CH_Stop
+    {standard input}:281    .text.XMC_I2S_CH_EnableEvent:00000000 $t
+    {standard input}:286    .text.XMC_I2S_CH_EnableEvent:00000000 XMC_I2S_CH_EnableEvent
+    {standard input}:304    .text.XMC_I2S_CH_EnableEvent:0000001c $d
+    {standard input}:307    .text.XMC_I2S_CH_DisableEvent:00000000 $t
+    {standard input}:312    .text.XMC_I2S_CH_DisableEvent:00000000 XMC_I2S_CH_DisableEvent
+    {standard input}:330    .text.XMC_I2S_CH_DisableEvent:0000001c $d
+
+UNDEFINED SYMBOLS
+XMC_SCU_CLOCK_GetPeripheralClockFrequency
+XMC_USIC_CH_SetBaudrate
+XMC_USIC_CH_Enable

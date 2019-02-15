@@ -1,0 +1,53 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "DAVE.c"
+  14              	 .section .text.DAVE_Init,"ax",%progbits
+  15              	 .align 1
+  16              	 .global DAVE_Init
+  17              	 .code 16
+  18              	 .thumb_func
+  20              	DAVE_Init:
+  21 0000 08B5     	 push {r3,lr}
+  22 0002 0748     	 ldr r0,.L4
+  23 0004 FFF7FEFF 	 bl CLOCK_XMC1_Init
+  24 0008 0028     	 cmp r0,#0
+  25 000a 07D1     	 bne .L2
+  26 000c 0548     	 ldr r0,.L4+4
+  27 000e FFF7FEFF 	 bl DIGITAL_IO_Init
+  28 0012 0028     	 cmp r0,#0
+  29 0014 02D1     	 bne .L2
+  30 0016 0448     	 ldr r0,.L4+8
+  31 0018 FFF7FEFF 	 bl UART_Init
+  32              	.L2:
+  33              	 
+  34 001c 08BD     	 pop {r3,pc}
+  35              	.L5:
+  36 001e C046     	 .align 2
+  37              	.L4:
+  38 0020 00000000 	 .word CLOCK_XMC1_0
+  39 0024 00000000 	 .word LED1
+  40 0028 00000000 	 .word UART_0
+  42              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 DAVE.c
+    {standard input}:15     .text.DAVE_Init:00000000 $t
+    {standard input}:20     .text.DAVE_Init:00000000 DAVE_Init
+    {standard input}:38     .text.DAVE_Init:00000020 $d
+
+UNDEFINED SYMBOLS
+CLOCK_XMC1_Init
+DIGITAL_IO_Init
+UART_Init
+CLOCK_XMC1_0
+LED1
+UART_0

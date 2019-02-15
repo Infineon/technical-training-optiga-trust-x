@@ -1,0 +1,775 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "serial_io_iface.c"
+  14              	 .section .text.UTIL_hexStrToArray,"ax",%progbits
+  15              	 .align 1
+  16              	 .global UTIL_hexStrToArray
+  17              	 .code 16
+  18              	 .thumb_func
+  20              	UTIL_hexStrToArray:
+  21 0000 F0B5     	 push {r4,r5,r6,r7,lr}
+  22 0002 93B0     	 sub sp,sp,#76
+  23 0004 0090     	 str r0,[sp]
+  24 0006 0291     	 str r1,[sp,#8]
+  25 0008 0392     	 str r2,[sp,#12]
+  26 000a 3049     	 ldr r1,.L17
+  27 000c 0E22     	 mov r2,#14
+  28 000e 08A8     	 add r0,sp,#32
+  29 0010 FFF7FEFF 	 bl memcpy
+  30 0014 0CA8     	 add r0,sp,#48
+  31 0016 2E49     	 ldr r1,.L17+4
+  32 0018 1822     	 mov r2,#24
+  33 001a FFF7FEFF 	 bl memcpy
+  34 001e 009B     	 ldr r3,[sp]
+  35 0020 002B     	 cmp r3,#0
+  36 0022 01D1     	 bne .L2
+  37              	.L4:
+  38 0024 0020     	 mov r0,#0
+  39 0026 4EE0     	 b .L3
+  40              	.L2:
+  41 0028 009B     	 ldr r3,[sp]
+  42 002a 1B78     	 ldrb r3,[r3]
+  43 002c 002B     	 cmp r3,#0
+  44 002e F9D0     	 beq .L4
+  45 0030 029B     	 ldr r3,[sp,#8]
+  46 0032 002B     	 cmp r3,#0
+  47 0034 F6D0     	 beq .L4
+  48 0036 0024     	 mov r4,#0
+  49 0038 271C     	 mov r7,r4
+  50 003a 1C70     	 strb r4,[r3]
+  51              	.L8:
+  52 003c 009B     	 ldr r3,[sp]
+  53 003e 08A9     	 add r1,sp,#32
+  54 0040 1819     	 add r0,r3,r4
+  55 0042 FFF7FEFF 	 bl strspn
+  56 0046 009B     	 ldr r3,[sp]
+  57 0048 2418     	 add r4,r4,r0
+  58 004a 1D19     	 add r5,r3,r4
+  59 004c 281C     	 mov r0,r5
+  60 004e FFF7FEFF 	 bl strlen
+  61 0052 0228     	 cmp r0,#2
+  62 0054 08D9     	 bls .L5
+  63 0056 2B78     	 ldrb r3,[r5]
+  64 0058 302B     	 cmp r3,#48
+  65 005a 05D1     	 bne .L5
+  66 005c 2022     	 mov r2,#32
+  67 005e 6B78     	 ldrb r3,[r5,#1]
+  68 0060 9343     	 bic r3,r2
+  69 0062 582B     	 cmp r3,#88
+  70 0064 00D1     	 bne .L5
+  71 0066 0234     	 add r4,r4,#2
+  72              	.L5:
+  73 0068 009B     	 ldr r3,[sp]
+  74 006a 0CA9     	 add r1,sp,#48
+  75 006c 1B19     	 add r3,r3,r4
+  76 006e 181C     	 mov r0,r3
+  77 0070 0193     	 str r3,[sp,#4]
+  78 0072 FFF7FEFF 	 bl strspn
+  79 0076 051E     	 sub r5,r0,#0
+  80 0078 24D0     	 beq .L9
+  81 007a 05AE     	 add r6,sp,#20
+  82 007c 0228     	 cmp r0,#2
+  83 007e 09DD     	 ble .L6
+  84 0080 019B     	 ldr r3,[sp,#4]
+  85 0082 0234     	 add r4,r4,#2
+  86 0084 1B78     	 ldrb r3,[r3]
+  87 0086 3370     	 strb r3,[r6]
+  88 0088 019B     	 ldr r3,[sp,#4]
+  89 008a 5B78     	 ldrb r3,[r3,#1]
+  90 008c 7370     	 strb r3,[r6,#1]
+  91 008e 0023     	 mov r3,#0
+  92 0090 B370     	 strb r3,[r6,#2]
+  93 0092 07E0     	 b .L7
+  94              	.L6:
+  95 0094 301C     	 mov r0,r6
+  96 0096 0199     	 ldr r1,[sp,#4]
+  97 0098 2A1C     	 mov r2,r5
+  98 009a FFF7FEFF 	 bl strncpy
+  99 009e 0023     	 mov r3,#0
+ 100 00a0 6419     	 add r4,r4,r5
+ 101 00a2 7355     	 strb r3,[r6,r5]
+ 102              	.L7:
+ 103 00a4 06AD     	 add r5,sp,#24
+ 104 00a6 05A8     	 add r0,sp,#20
+ 105 00a8 0A49     	 ldr r1,.L17+8
+ 106 00aa 2A1C     	 mov r2,r5
+ 107 00ac FFF7FEFF 	 bl sscanf
+ 108 00b0 0028     	 cmp r0,#0
+ 109 00b2 B7DD     	 ble .L4
+ 110 00b4 0137     	 add r7,r7,#1
+ 111 00b6 2A78     	 ldrb r2,[r5]
+ 112 00b8 0299     	 ldr r1,[sp,#8]
+ 113 00ba 7B1E     	 sub r3,r7,#1
+ 114 00bc CA54     	 strb r2,[r1,r3]
+ 115 00be 039B     	 ldr r3,[sp,#12]
+ 116 00c0 9F42     	 cmp r7,r3
+ 117 00c2 BBDB     	 blt .L8
+ 118              	.L9:
+ 119 00c4 381C     	 mov r0,r7
+ 120              	.L3:
+ 121 00c6 13B0     	 add sp,sp,#76
+ 122              	 
+ 123 00c8 F0BD     	 pop {r4,r5,r6,r7,pc}
+ 124              	.L18:
+ 125 00ca C046     	 .align 2
+ 126              	.L17:
+ 127 00cc 03000000 	 .word .LC2
+ 128 00d0 11000000 	 .word .LC4
+ 129 00d4 00000000 	 .word .LC6
+ 131              	 .section .text.uart0_end_of_transmit_callback,"ax",%progbits
+ 132              	 .align 1
+ 133              	 .global uart0_end_of_transmit_callback
+ 134              	 .code 16
+ 135              	 .thumb_func
+ 137              	uart0_end_of_transmit_callback:
+ 138 0000 0022     	 mov r2,#0
+ 139 0002 014B     	 ldr r3,.L20
+ 140              	 
+ 141 0004 5A71     	 strb r2,[r3,#5]
+ 142 0006 7047     	 bx lr
+ 143              	.L21:
+ 144              	 .align 2
+ 145              	.L20:
+ 146 0008 00000000 	 .word .LANCHOR0
+ 148              	 .section .text.uart0_end_of_receive_callback,"ax",%progbits
+ 149              	 .align 1
+ 150              	 .global uart0_end_of_receive_callback
+ 151              	 .code 16
+ 152              	 .thumb_func
+ 154              	uart0_end_of_receive_callback:
+ 155 0000 0022     	 mov r2,#0
+ 156 0002 014B     	 ldr r3,.L23
+ 157              	 
+ 158 0004 1A71     	 strb r2,[r3,#4]
+ 159 0006 7047     	 bx lr
+ 160              	.L24:
+ 161              	 .align 2
+ 162              	.L23:
+ 163 0008 00000000 	 .word .LANCHOR0
+ 165              	 .section .text.terminal_io_read,"ax",%progbits
+ 166              	 .align 1
+ 167              	 .global terminal_io_read
+ 168              	 .code 16
+ 169              	 .thumb_func
+ 171              	terminal_io_read:
+ 172 0000 0122     	 mov r2,#1
+ 173 0002 10B5     	 push {r4,lr}
+ 174 0004 054C     	 ldr r4,.L27
+ 175 0006 011C     	 mov r1,r0
+ 176 0008 2068     	 ldr r0,[r4]
+ 177 000a 2271     	 strb r2,[r4,#4]
+ 178 000c FFF7FEFF 	 bl UART_Receive
+ 179 0010 2379     	 ldrb r3,[r4,#4]
+ 180              	.L26:
+ 181 0012 002B     	 cmp r3,#0
+ 182 0014 FDD1     	 bne .L26
+ 183 0016 0120     	 mov r0,#1
+ 184              	 
+ 185 0018 10BD     	 pop {r4,pc}
+ 186              	.L28:
+ 187 001a C046     	 .align 2
+ 188              	.L27:
+ 189 001c 00000000 	 .word .LANCHOR0
+ 191              	 .section .text.terminal_io_write,"ax",%progbits
+ 192              	 .align 1
+ 193              	 .global terminal_io_write
+ 194              	 .code 16
+ 195              	 .thumb_func
+ 197              	terminal_io_write:
+ 198 0000 031C     	 mov r3,r0
+ 199 0002 0A1C     	 mov r2,r1
+ 200 0004 0121     	 mov r1,#1
+ 201 0006 10B5     	 push {r4,lr}
+ 202 0008 044C     	 ldr r4,.L31
+ 203 000a 6171     	 strb r1,[r4,#5]
+ 204 000c 2068     	 ldr r0,[r4]
+ 205 000e 191C     	 mov r1,r3
+ 206 0010 FFF7FEFF 	 bl UART_Transmit
+ 207 0014 6379     	 ldrb r3,[r4,#5]
+ 208              	.L30:
+ 209 0016 002B     	 cmp r3,#0
+ 210 0018 FDD1     	 bne .L30
+ 211              	 
+ 212 001a 10BD     	 pop {r4,pc}
+ 213              	.L32:
+ 214              	 .align 2
+ 215              	.L31:
+ 216 001c 00000000 	 .word .LANCHOR0
+ 218              	 .section .text.f_putc,"ax",%progbits
+ 219              	 .align 1
+ 220              	 .global f_putc
+ 221              	 .code 16
+ 222              	 .thumb_func
+ 224              	f_putc:
+ 225 0000 07B5     	 push {r0,r1,r2,lr}
+ 226 0002 01AB     	 add r3,sp,#4
+ 227 0004 1870     	 strb r0,[r3]
+ 228 0006 0121     	 mov r1,#1
+ 229 0008 0A28     	 cmp r0,#10
+ 230 000a 02D1     	 bne .L34
+ 231 000c 0D22     	 mov r2,#13
+ 232 000e 4918     	 add r1,r1,r1
+ 233 0010 5A70     	 strb r2,[r3,#1]
+ 234              	.L34:
+ 235 0012 181C     	 mov r0,r3
+ 236 0014 FFF7FEFF 	 bl terminal_io_write
+ 237              	 
+ 238 0018 0120     	 mov r0,#1
+ 239 001a 0EBD     	 pop {r1,r2,r3,pc}
+ 241              	 .section .text.f_puts,"ax",%progbits
+ 242              	 .align 1
+ 243              	 .global f_puts
+ 244              	 .code 16
+ 245              	 .thumb_func
+ 247              	f_puts:
+ 248 0000 38B5     	 push {r3,r4,r5,lr}
+ 249 0002 051C     	 mov r5,r0
+ 250 0004 FFF7FEFF 	 bl strlen
+ 251 0008 041C     	 mov r4,r0
+ 252 000a 281C     	 mov r0,r5
+ 253 000c 211C     	 mov r1,r4
+ 254 000e FFF7FEFF 	 bl terminal_io_write
+ 255              	 
+ 256 0012 201C     	 mov r0,r4
+ 257 0014 38BD     	 pop {r3,r4,r5,pc}
+ 259              	 .global __aeabi_uidivmod
+ 260              	 .global __aeabi_uidiv
+ 261              	 .section .text.OPTIGAprintf,"ax",%progbits
+ 262              	 .align 1
+ 263              	 .global OPTIGAprintf
+ 264              	 .code 16
+ 265              	 .thumb_func
+ 267              	OPTIGAprintf:
+ 268 0000 0FB4     	 push {r0,r1,r2,r3}
+ 269 0002 F0B5     	 push {r4,r5,r6,r7,lr}
+ 270 0004 8DB0     	 sub sp,sp,#52
+ 271 0006 12AB     	 add r3,sp,#72
+ 272 0008 40CB     	 ldmia r3!,{r6}
+ 273 000a 0793     	 str r3,[sp,#28]
+ 274              	.L79:
+ 275 000c 3078     	 ldrb r0,[r6]
+ 276 000e 0028     	 cmp r0,#0
+ 277 0010 00D1     	 bne .LCB291
+ 278 0012 FAE0     	 b .L37
+ 279              	.LCB291:
+ 280 0014 2528     	 cmp r0,#37
+ 281 0016 01D0     	 beq .L39
+ 282 0018 0136     	 add r6,r6,#1
+ 283 001a 7AE0     	 b .L106
+ 284              	.L39:
+ 285 001c 7778     	 ldrb r7,[r6,#1]
+ 286 001e 302F     	 cmp r7,#48
+ 287 0020 03D1     	 bne .L41
+ 288 0022 F31C     	 add r3,r6,#3
+ 289 0024 B778     	 ldrb r7,[r6,#2]
+ 290 0026 0122     	 mov r2,#1
+ 291 0028 07E0     	 b .L104
+ 292              	.L41:
+ 293 002a 2D2F     	 cmp r7,#45
+ 294 002c 02D0     	 beq .L43
+ 295 002e B31C     	 add r3,r6,#2
+ 296 0030 0022     	 mov r2,#0
+ 297 0032 02E0     	 b .L104
+ 298              	.L43:
+ 299 0034 0222     	 mov r2,#2
+ 300 0036 B778     	 ldrb r7,[r6,#2]
+ 301 0038 F31C     	 add r3,r6,#3
+ 302              	.L104:
+ 303 003a 0192     	 str r2,[sp,#4]
+ 304 003c 0022     	 mov r2,#0
+ 305 003e 0292     	 str r2,[sp,#8]
+ 306              	.L44:
+ 307 0040 3A1C     	 mov r2,r7
+ 308 0042 303A     	 sub r2,r2,#48
+ 309 0044 092A     	 cmp r2,#9
+ 310 0046 08D8     	 bhi .L107
+ 311 0048 0A22     	 mov r2,#10
+ 312 004a 0299     	 ldr r1,[sp,#8]
+ 313 004c 4A43     	 mul r2,r1
+ 314 004e D719     	 add r7,r2,r7
+ 315 0050 303F     	 sub r7,r7,#48
+ 316 0052 0297     	 str r7,[sp,#8]
+ 317 0054 1F78     	 ldrb r7,[r3]
+ 318 0056 0133     	 add r3,r3,#1
+ 319 0058 F2E7     	 b .L44
+ 320              	.L107:
+ 321 005a 2022     	 mov r2,#32
+ 322 005c 391C     	 mov r1,r7
+ 323 005e 9143     	 bic r1,r2
+ 324 0060 1E1C     	 mov r6,r3
+ 325 0062 0A1E     	 sub r2,r1,#0
+ 326 0064 4C2A     	 cmp r2,#76
+ 327 0066 05D1     	 bne .L46
+ 328 0068 0199     	 ldr r1,[sp,#4]
+ 329 006a 483A     	 sub r2,r2,#72
+ 330 006c 1143     	 orr r1,r2
+ 331 006e 1F78     	 ldrb r7,[r3]
+ 332 0070 0191     	 str r1,[sp,#4]
+ 333 0072 0136     	 add r6,r6,#1
+ 334              	.L46:
+ 335 0074 002F     	 cmp r7,#0
+ 336 0076 00D1     	 bne .LCB362
+ 337 0078 C7E0     	 b .L37
+ 338              	.LCB362:
+ 339 007a 3A1C     	 mov r2,r7
+ 340 007c 613A     	 sub r2,r2,#97
+ 341 007e D2B2     	 uxtb r2,r2
+ 342 0080 3B1C     	 mov r3,r7
+ 343 0082 192A     	 cmp r2,#25
+ 344 0084 01D8     	 bhi .L48
+ 345 0086 203B     	 sub r3,r3,#32
+ 346 0088 DBB2     	 uxtb r3,r3
+ 347              	.L48:
+ 348 008a 4F2B     	 cmp r3,#79
+ 349 008c 15D0     	 beq .L50
+ 350 008e 08D8     	 bhi .L51
+ 351 0090 432B     	 cmp r3,#67
+ 352 0092 35D0     	 beq .L52
+ 353 0094 442B     	 cmp r3,#68
+ 354 0096 40D0     	 beq .L81
+ 355 0098 0222     	 mov r2,#2
+ 356 009a 0392     	 str r2,[sp,#12]
+ 357 009c 422B     	 cmp r3,#66
+ 358 009e 3ED0     	 beq .L53
+ 359 00a0 36E0     	 b .L49
+ 360              	.L51:
+ 361 00a2 552B     	 cmp r3,#85
+ 362 00a4 39D0     	 beq .L81
+ 363 00a6 582B     	 cmp r3,#88
+ 364 00a8 30D0     	 beq .L55
+ 365 00aa 532B     	 cmp r3,#83
+ 366 00ac 30D1     	 bne .L49
+ 367 00ae 079B     	 ldr r3,[sp,#28]
+ 368 00b0 1F68     	 ldr r7,[r3]
+ 369 00b2 1A1D     	 add r2,r3,#4
+ 370 00b4 0792     	 str r2,[sp,#28]
+ 371 00b6 3B1C     	 mov r3,r7
+ 372 00b8 01E0     	 b .L57
+ 373              	.L50:
+ 374 00ba 0822     	 mov r2,#8
+ 375 00bc 2EE0     	 b .L105
+ 376              	.L57:
+ 377 00be DD1B     	 sub r5,r3,r7
+ 378 00c0 0133     	 add r3,r3,#1
+ 379 00c2 5A1E     	 sub r2,r3,#1
+ 380 00c4 1478     	 ldrb r4,[r2]
+ 381 00c6 002C     	 cmp r4,#0
+ 382 00c8 F9D1     	 bne .L57
+ 383 00ca 019B     	 ldr r3,[sp,#4]
+ 384 00cc 9B07     	 lsl r3,r3,#30
+ 385 00ce 09D4     	 bmi .L58
+ 386              	.L59:
+ 387 00d0 0135     	 add r5,r5,#1
+ 388 00d2 029A     	 ldr r2,[sp,#8]
+ 389 00d4 6B1E     	 sub r3,r5,#1
+ 390 00d6 9342     	 cmp r3,r2
+ 391 00d8 04DA     	 bge .L58
+ 392 00da 2020     	 mov r0,#32
+ 393 00dc FFF7FEFF 	 bl f_putc
+ 394 00e0 2418     	 add r4,r4,r0
+ 395 00e2 F5E7     	 b .L59
+ 396              	.L58:
+ 397 00e4 381C     	 mov r0,r7
+ 398 00e6 FFF7FEFF 	 bl f_puts
+ 399 00ea 2418     	 add r4,r4,r0
+ 400              	.L61:
+ 401 00ec 029B     	 ldr r3,[sp,#8]
+ 402 00ee 9D42     	 cmp r5,r3
+ 403 00f0 00DB     	 blt .LCB441
+ 404 00f2 87E0     	 b .L40
+ 405              	.LCB441:
+ 406 00f4 2020     	 mov r0,#32
+ 407 00f6 FFF7FEFF 	 bl f_putc
+ 408 00fa 0135     	 add r5,r5,#1
+ 409 00fc 2418     	 add r4,r4,r0
+ 410 00fe F5E7     	 b .L61
+ 411              	.L52:
+ 412 0100 079B     	 ldr r3,[sp,#28]
+ 413 0102 1868     	 ldr r0,[r3]
+ 414 0104 1A1D     	 add r2,r3,#4
+ 415 0106 0792     	 str r2,[sp,#28]
+ 416 0108 C0B2     	 uxtb r0,r0
+ 417 010a 02E0     	 b .L106
+ 418              	.L55:
+ 419 010c 1022     	 mov r2,#16
+ 420 010e 05E0     	 b .L105
+ 421              	.L49:
+ 422 0110 381C     	 mov r0,r7
+ 423              	.L106:
+ 424 0112 FFF7FEFF 	 bl f_putc
+ 425 0116 041C     	 mov r4,r0
+ 426 0118 74E0     	 b .L40
+ 427              	.L81:
+ 428 011a 0A22     	 mov r2,#10
+ 429              	.L105:
+ 430 011c 0392     	 str r2,[sp,#12]
+ 431              	.L53:
+ 432 011e 0199     	 ldr r1,[sp,#4]
+ 433 0120 079A     	 ldr r2,[sp,#28]
+ 434 0122 4907     	 lsl r1,r1,#29
+ 435 0124 05D5     	 bpl .L63
+ 436 0126 111D     	 add r1,r2,#4
+ 437 0128 0791     	 str r1,[sp,#28]
+ 438 012a 1468     	 ldr r4,[r2]
+ 439 012c 442B     	 cmp r3,#68
+ 440 012e 11D1     	 bne .L65
+ 441 0130 09E0     	 b .L64
+ 442              	.L63:
+ 443 0132 442B     	 cmp r3,#68
+ 444 0134 03D1     	 bne .L66
+ 445 0136 131D     	 add r3,r2,#4
+ 446 0138 0793     	 str r3,[sp,#28]
+ 447 013a 1468     	 ldr r4,[r2]
+ 448 013c 03E0     	 b .L64
+ 449              	.L66:
+ 450 013e 131D     	 add r3,r2,#4
+ 451 0140 0793     	 str r3,[sp,#28]
+ 452 0142 1468     	 ldr r4,[r2]
+ 453 0144 06E0     	 b .L65
+ 454              	.L64:
+ 455 0146 002C     	 cmp r4,#0
+ 456 0148 04DA     	 bge .L65
+ 457 014a 0823     	 mov r3,#8
+ 458 014c 019A     	 ldr r2,[sp,#4]
+ 459 014e 6442     	 neg r4,r4
+ 460 0150 1A43     	 orr r2,r3
+ 461 0152 0192     	 str r2,[sp,#4]
+ 462              	.L65:
+ 463 0154 0025     	 mov r5,#0
+ 464              	.L70:
+ 465 0156 201C     	 mov r0,r4
+ 466 0158 0399     	 ldr r1,[sp,#12]
+ 467 015a FFF7FEFF 	 bl __aeabi_uidivmod
+ 468 015e 6B46     	 mov r3,sp
+ 469 0160 0591     	 str r1,[sp,#20]
+ 470 0162 1B7D     	 ldrb r3,[r3,#20]
+ 471 0164 201C     	 mov r0,r4
+ 472 0166 0399     	 ldr r1,[sp,#12]
+ 473 0168 0493     	 str r3,[sp,#16]
+ 474 016a FFF7FEFF 	 bl __aeabi_uidiv
+ 475 016e 059B     	 ldr r3,[sp,#20]
+ 476 0170 041C     	 mov r4,r0
+ 477 0172 092B     	 cmp r3,#9
+ 478 0174 07D9     	 bls .L67
+ 479 0176 2723     	 mov r3,#39
+ 480 0178 782F     	 cmp r7,#120
+ 481 017a 00D0     	 beq .L68
+ 482 017c 203B     	 sub r3,r3,#32
+ 483              	.L68:
+ 484 017e 049A     	 ldr r2,[sp,#16]
+ 485 0180 9B18     	 add r3,r3,r2
+ 486 0182 DBB2     	 uxtb r3,r3
+ 487 0184 0493     	 str r3,[sp,#16]
+ 488              	.L67:
+ 489 0186 0820     	 mov r0,#8
+ 490 0188 049B     	 ldr r3,[sp,#16]
+ 491 018a 0135     	 add r5,r5,#1
+ 492 018c 06A9     	 add r1,sp,#24
+ 493 018e 6A1E     	 sub r2,r5,#1
+ 494 0190 3033     	 add r3,r3,#48
+ 495 0192 0918     	 add r1,r1,r0
+ 496 0194 8B54     	 strb r3,[r1,r2]
+ 497 0196 002C     	 cmp r4,#0
+ 498 0198 01D0     	 beq .L69
+ 499 019a 102D     	 cmp r5,#16
+ 500 019c DBD1     	 bne .L70
+ 501              	.L69:
+ 502 019e 019B     	 ldr r3,[sp,#4]
+ 503 01a0 1B07     	 lsl r3,r3,#28
+ 504 01a2 05D5     	 bpl .L71
+ 505 01a4 0821     	 mov r1,#8
+ 506 01a6 2D23     	 mov r3,#45
+ 507 01a8 06AA     	 add r2,sp,#24
+ 508 01aa 5218     	 add r2,r2,r1
+ 509 01ac 5355     	 strb r3,[r2,r5]
+ 510 01ae 0135     	 add r5,r5,#1
+ 511              	.L71:
+ 512 01b0 019B     	 ldr r3,[sp,#4]
+ 513 01b2 3027     	 mov r7,#48
+ 514 01b4 DB07     	 lsl r3,r3,#31
+ 515 01b6 00D4     	 bmi .L72
+ 516 01b8 103F     	 sub r7,r7,#16
+ 517              	.L72:
+ 518 01ba 0024     	 mov r4,#0
+ 519 01bc 0395     	 str r5,[sp,#12]
+ 520              	.L73:
+ 521 01be 019B     	 ldr r3,[sp,#4]
+ 522 01c0 9B07     	 lsl r3,r3,#30
+ 523 01c2 0BD4     	 bmi .L76
+ 524 01c4 039B     	 ldr r3,[sp,#12]
+ 525 01c6 029A     	 ldr r2,[sp,#8]
+ 526 01c8 0133     	 add r3,r3,#1
+ 527 01ca 0393     	 str r3,[sp,#12]
+ 528 01cc 013B     	 sub r3,r3,#1
+ 529 01ce 9342     	 cmp r3,r2
+ 530 01d0 04DA     	 bge .L76
+ 531 01d2 381C     	 mov r0,r7
+ 532 01d4 FFF7FEFF 	 bl f_putc
+ 533 01d8 2418     	 add r4,r4,r0
+ 534 01da F0E7     	 b .L73
+ 535              	.L76:
+ 536 01dc 0822     	 mov r2,#8
+ 537 01de 06AB     	 add r3,sp,#24
+ 538 01e0 9B18     	 add r3,r3,r2
+ 539 01e2 013D     	 sub r5,r5,#1
+ 540 01e4 585D     	 ldrb r0,[r3,r5]
+ 541 01e6 FFF7FEFF 	 bl f_putc
+ 542 01ea 2418     	 add r4,r4,r0
+ 543 01ec 002D     	 cmp r5,#0
+ 544 01ee F5D1     	 bne .L76
+ 545 01f0 039D     	 ldr r5,[sp,#12]
+ 546              	.L77:
+ 547 01f2 029B     	 ldr r3,[sp,#8]
+ 548 01f4 9D42     	 cmp r5,r3
+ 549 01f6 05DA     	 bge .L40
+ 550 01f8 2020     	 mov r0,#32
+ 551 01fa FFF7FEFF 	 bl f_putc
+ 552 01fe 0135     	 add r5,r5,#1
+ 553 0200 2418     	 add r4,r4,r0
+ 554 0202 F6E7     	 b .L77
+ 555              	.L40:
+ 556 0204 631C     	 add r3,r4,#1
+ 557 0206 00D0     	 beq .LCB638
+ 558 0208 00E7     	 b .L79
+ 559              	.LCB638:
+ 560              	.L37:
+ 561 020a 0DB0     	 add sp,sp,#52
+ 562              	 
+ 563 020c F0BC     	 pop {r4,r5,r6,r7}
+ 564 020e 08BC     	 pop {r3}
+ 565 0210 04B0     	 add sp,sp,#16
+ 566 0212 1847     	 bx r3
+ 568              	 .section .text.StrDump,"ax",%progbits
+ 569              	 .align 1
+ 570              	 .global StrDump
+ 571              	 .code 16
+ 572              	 .thumb_func
+ 574              	StrDump:
+ 575 0000 70B5     	 push {r4,r5,r6,lr}
+ 576 0002 B2B0     	 sub sp,sp,#200
+ 577 0004 051C     	 mov r5,r0
+ 578 0006 0E1C     	 mov r6,r1
+ 579 0008 141C     	 mov r4,r2
+ 580 000a 6846     	 mov r0,sp
+ 581 000c 0021     	 mov r1,#0
+ 582 000e C822     	 mov r2,#200
+ 583 0010 FFF7FEFF 	 bl memset
+ 584 0014 002D     	 cmp r5,#0
+ 585 0016 07D0     	 beq .L109
+ 586 0018 2B78     	 ldrb r3,[r5]
+ 587 001a 002B     	 cmp r3,#0
+ 588 001c 04D0     	 beq .L109
+ 589 001e 6846     	 mov r0,sp
+ 590 0020 291C     	 mov r1,r5
+ 591 0022 C722     	 mov r2,#199
+ 592 0024 FFF7FEFF 	 bl strncpy
+ 593              	.L109:
+ 594 0028 6846     	 mov r0,sp
+ 595 002a FFF7FEFF 	 bl strlen
+ 596 002e 002E     	 cmp r6,#0
+ 597 0030 0BD0     	 beq .L110
+ 598 0032 002C     	 cmp r4,#0
+ 599 0034 09D0     	 beq .L110
+ 600 0036 051C     	 mov r5,r0
+ 601 0038 C723     	 mov r3,#199
+ 602 003a 6D44     	 add r5,r5,sp
+ 603 003c 1A1A     	 sub r2,r3,r0
+ 604 003e 311C     	 mov r1,r6
+ 605 0040 281C     	 mov r0,r5
+ 606 0042 FFF7FEFF 	 bl strncat
+ 607 0046 0023     	 mov r3,#0
+ 608 0048 2B55     	 strb r3,[r5,r4]
+ 609              	.L110:
+ 610 004a 0348     	 ldr r0,.L123
+ 611 004c 6946     	 mov r1,sp
+ 612 004e FFF7FEFF 	 bl OPTIGAprintf
+ 613 0052 32B0     	 add sp,sp,#200
+ 614              	 
+ 615 0054 70BD     	 pop {r4,r5,r6,pc}
+ 616              	.L124:
+ 617 0056 C046     	 .align 2
+ 618              	.L123:
+ 619 0058 29000000 	 .word .LC12
+ 621              	 .section .text.HexDumpNoCR,"ax",%progbits
+ 622              	 .align 1
+ 623              	 .global HexDumpNoCR
+ 624              	 .code 16
+ 625              	 .thumb_func
+ 627              	HexDumpNoCR:
+ 628 0000 70B5     	 push {r4,r5,r6,lr}
+ 629 0002 B2B0     	 sub sp,sp,#200
+ 630 0004 041C     	 mov r4,r0
+ 631 0006 0E1C     	 mov r6,r1
+ 632 0008 151C     	 mov r5,r2
+ 633 000a 6846     	 mov r0,sp
+ 634 000c 0021     	 mov r1,#0
+ 635 000e C822     	 mov r2,#200
+ 636 0010 FFF7FEFF 	 bl memset
+ 637 0014 002C     	 cmp r4,#0
+ 638 0016 07D0     	 beq .L126
+ 639 0018 2378     	 ldrb r3,[r4]
+ 640 001a 002B     	 cmp r3,#0
+ 641 001c 04D0     	 beq .L126
+ 642 001e 6846     	 mov r0,sp
+ 643 0020 211C     	 mov r1,r4
+ 644 0022 C722     	 mov r2,#199
+ 645 0024 FFF7FEFF 	 bl strncpy
+ 646              	.L126:
+ 647 0028 201C     	 mov r0,r4
+ 648 002a FFF7FEFF 	 bl OPTIGAprintf
+ 649 002e 0024     	 mov r4,#0
+ 650              	.L127:
+ 651 0030 AC42     	 cmp r4,r5
+ 652 0032 18DA     	 bge .L140
+ 653 0034 2307     	 lsl r3,r4,#28
+ 654 0036 05D1     	 bne .L128
+ 655 0038 002C     	 cmp r4,#0
+ 656 003a 03D0     	 beq .L128
+ 657 003c 0D48     	 ldr r0,.L141
+ 658 003e 6946     	 mov r1,sp
+ 659 0040 FFF7FEFF 	 bl OPTIGAprintf
+ 660              	.L128:
+ 661 0044 0C48     	 ldr r0,.L141+4
+ 662 0046 2040     	 and r0,r4
+ 663 0048 04D5     	 bpl .L129
+ 664 004a 1023     	 mov r3,#16
+ 665 004c 0138     	 sub r0,r0,#1
+ 666 004e 5B42     	 neg r3,r3
+ 667 0050 1843     	 orr r0,r3
+ 668 0052 0130     	 add r0,r0,#1
+ 669              	.L129:
+ 670 0054 0323     	 mov r3,#3
+ 671 0056 5843     	 mul r0,r3
+ 672 0058 325D     	 ldrb r2,[r6,r4]
+ 673 005a 6844     	 add r0,r0,sp
+ 674 005c 0749     	 ldr r1,.L141+8
+ 675 005e FFF7FEFF 	 bl sprintf
+ 676 0062 0134     	 add r4,r4,#1
+ 677 0064 E4E7     	 b .L127
+ 678              	.L140:
+ 679 0066 0648     	 ldr r0,.L141+12
+ 680 0068 6946     	 mov r1,sp
+ 681 006a FFF7FEFF 	 bl OPTIGAprintf
+ 682              	
+ 683 006e C046     	 nop
+ 684              	
+ 685              	 .code 16
+ 686 0070 32B0     	 add sp,sp,#200
+ 687              	 
+ 688 0072 70BD     	 pop {r4,r5,r6,pc}
+ 689              	.L142:
+ 690              	 .align 2
+ 691              	.L141:
+ 692 0074 2C000000 	 .word .LC14
+ 693 0078 0F000080 	 .word -2147483633
+ 694 007c 31000000 	 .word .LC16
+ 695 0080 29000000 	 .word .LC12
+ 697              	 .section .text.HexDump,"ax",%progbits
+ 698              	 .align 1
+ 699              	 .global HexDump
+ 700              	 .code 16
+ 701              	 .thumb_func
+ 703              	HexDump:
+ 704 0000 08B5     	 push {r3,lr}
+ 705 0002 FFF7FEFF 	 bl HexDumpNoCR
+ 706 0006 0248     	 ldr r0,.L144
+ 707 0008 FFF7FEFF 	 bl OPTIGAprintf
+ 708              	 
+ 709 000c 08BD     	 pop {r3,pc}
+ 710              	.L145:
+ 711 000e C046     	 .align 2
+ 712              	.L144:
+ 713 0010 37000000 	 .word .LC19
+ 715              	 .global uart0_ctx
+ 716              	 .section .data.uart0_ctx,"aw",%progbits
+ 717              	 .align 2
+ 718              	 .set .LANCHOR0,.+0
+ 721              	uart0_ctx:
+ 722 0000 00000000 	 .word UART_0
+ 723 0004 01       	 .byte 1
+ 724 0005 01       	 .byte 1
+ 725 0006 0000     	 .space 2
+ 726              	 .section .rodata.str1.1,"aMS",%progbits,1
+ 727              	.LC6:
+ 728 0000 257800   	 .ascii "%x\000"
+ 729              	.LC2:
+ 730 0003 202E3C3E 	 .ascii " .<>/'\"-_\\:;\011\000"
+ 730      2F27222D 
+ 730      5F5C3A3B 
+ 730      0900
+ 731              	.LC4:
+ 732 0011 30783132 	 .ascii "0x123456789ABCDEFabcdef\000"
+ 732      33343536 
+ 732      37383941 
+ 732      42434445 
+ 732      46616263 
+ 733              	.LC12:
+ 734 0029 257300   	 .ascii "%s\000"
+ 735              	.LC14:
+ 736 002c 25730A0D 	 .ascii "%s\012\015\000"
+ 736      00
+ 737              	.LC16:
+ 738 0031 252E3258 	 .ascii "%.2X \000"
+ 738      2000
+ 739              	.LC19:
+ 740 0037 0A00     	 .ascii "\012\000"
+ 741              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 serial_io_iface.c
+    {standard input}:15     .text.UTIL_hexStrToArray:00000000 $t
+    {standard input}:20     .text.UTIL_hexStrToArray:00000000 UTIL_hexStrToArray
+    {standard input}:127    .text.UTIL_hexStrToArray:000000cc $d
+    {standard input}:132    .text.uart0_end_of_transmit_callback:00000000 $t
+    {standard input}:137    .text.uart0_end_of_transmit_callback:00000000 uart0_end_of_transmit_callback
+    {standard input}:146    .text.uart0_end_of_transmit_callback:00000008 $d
+    {standard input}:149    .text.uart0_end_of_receive_callback:00000000 $t
+    {standard input}:154    .text.uart0_end_of_receive_callback:00000000 uart0_end_of_receive_callback
+    {standard input}:163    .text.uart0_end_of_receive_callback:00000008 $d
+    {standard input}:166    .text.terminal_io_read:00000000 $t
+    {standard input}:171    .text.terminal_io_read:00000000 terminal_io_read
+    {standard input}:189    .text.terminal_io_read:0000001c $d
+    {standard input}:192    .text.terminal_io_write:00000000 $t
+    {standard input}:197    .text.terminal_io_write:00000000 terminal_io_write
+    {standard input}:216    .text.terminal_io_write:0000001c $d
+    {standard input}:219    .text.f_putc:00000000 $t
+    {standard input}:224    .text.f_putc:00000000 f_putc
+    {standard input}:242    .text.f_puts:00000000 $t
+    {standard input}:247    .text.f_puts:00000000 f_puts
+    {standard input}:262    .text.OPTIGAprintf:00000000 $t
+    {standard input}:267    .text.OPTIGAprintf:00000000 OPTIGAprintf
+    {standard input}:569    .text.StrDump:00000000 $t
+    {standard input}:574    .text.StrDump:00000000 StrDump
+    {standard input}:619    .text.StrDump:00000058 $d
+    {standard input}:622    .text.HexDumpNoCR:00000000 $t
+    {standard input}:627    .text.HexDumpNoCR:00000000 HexDumpNoCR
+    {standard input}:692    .text.HexDumpNoCR:00000074 $d
+    {standard input}:698    .text.HexDump:00000000 $t
+    {standard input}:703    .text.HexDump:00000000 HexDump
+    {standard input}:713    .text.HexDump:00000010 $d
+    {standard input}:721    .data.uart0_ctx:00000000 uart0_ctx
+    {standard input}:717    .data.uart0_ctx:00000000 $d
+
+UNDEFINED SYMBOLS
+memcpy
+strspn
+strlen
+strncpy
+sscanf
+UART_Receive
+UART_Transmit
+__aeabi_uidivmod
+__aeabi_uidiv
+memset
+strncat
+sprintf
+UART_0

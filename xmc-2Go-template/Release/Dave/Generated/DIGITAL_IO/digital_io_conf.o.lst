@@ -1,0 +1,31 @@
+   1              	 .cpu cortex-m0
+   2              	 .fpu softvfp
+   3              	 .eabi_attribute 20,1
+   4              	 .eabi_attribute 21,1
+   5              	 .eabi_attribute 23,3
+   6              	 .eabi_attribute 24,1
+   7              	 .eabi_attribute 25,1
+   8              	 .eabi_attribute 26,1
+   9              	 .eabi_attribute 30,4
+  10              	 .eabi_attribute 34,0
+  11              	 .eabi_attribute 18,4
+  12              	 .code 16
+  13              	 .file "digital_io_conf.c"
+  14              	 .global LED1
+  15              	 .section .rodata.LED1,"a",%progbits
+  16              	 .align 2
+  19              	LED1:
+  20 0000 00010440 	 .word 1074004224
+  21 0004 80       	 .byte -128
+  22 0005 000000   	 .space 3
+  23 0008 00000100 	 .word 65536
+  24 000c 00       	 .byte 0
+  25 000d 00       	 .byte 0
+  26 000e 0000     	 .space 2
+  27              	 .ident "GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20141119 (release) [ARM/embedded-4_9-branch revision 218278]"
+DEFINED SYMBOLS
+                            *ABS*:00000000 digital_io_conf.c
+    {standard input}:19     .rodata.LED1:00000000 LED1
+    {standard input}:16     .rodata.LED1:00000000 $d
+
+NO UNDEFINED SYMBOLS
